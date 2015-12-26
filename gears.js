@@ -275,7 +275,7 @@ var GearPowerSelector = React.createClass({
         <label>
           欲しいギアパワー:
           <select onChange={this.onChange}>
-            <option>-</option>
+            <option>(全て)</option>
             <option>攻撃力アップ</option>
             <option>防御力アップ</option>
             <option>インク効率アップ(メイン)</option>
@@ -380,7 +380,8 @@ var App = React.createClass({
       '-': '99'
     };
     var matchedGears = theGears.filter(function (gear) {
-      return gear.main === gearPower || gear.sub === gearPower;
+      return orderFromGearPower[gearPower] === undefined ||
+             gear.main === gearPower || gear.sub === gearPower;
     });
     var mapped = matchedGears.map(function (gear, i) {
       return {
