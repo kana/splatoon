@@ -305,8 +305,54 @@ var GearPowerSelector = React.createClass({
   }
 });
 
+var GearList = React.createClass({
+  render: function () {
+    var validGears = gears;  // TODO: Filter by user selection.
+    var gearNodes = validGears.map(function (gear) {
+      return (
+        <tr key={gear.name}>
+          <td>{gear.type}</td>
+          <td>{gear.name}</td>
+          <td>{gear.main}</td>
+          <td>{gear.sub}</td>
+          <td>{gear.subrare}</td>
+          <td>{gear.brand}</td>
+        </tr>
+      );
+    });
+    return (
+      <table className="gearList">
+        <thead>
+          <tr>
+            <th>部位</th>
+            <th>名前</th>
+            <th>メイン</th>
+            <th>サブ+</th>
+            <th>サブ-</th>
+            <th>ブランド</th>
+          </tr>
+        </thead>
+        <tbody>
+          {gearNodes}
+        </tbody>
+      </table>
+    );
+  }
+});
+
+var App = React.createClass({
+  render: function () {
+    return (
+      <div className="app">
+        <GearPowerSelector />
+        <GearList />
+      </div>
+    );
+  }
+});
+
 ReactDOM.render(
-  <GearPowerSelector />,
+  <App />,
   document.getElementById('content')
 );
 
