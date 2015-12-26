@@ -309,8 +309,7 @@ var GearPowerSelector = React.createClass({
 
 var GearList = React.createClass({
   render: function () {
-    var validGears = gears;  // TODO: Filter by user selection.
-    var gearNodes = validGears.map(function (gear) {
+    var gearNodes = this.props.gears.map(function (gear) {
       return (
         <tr key={gear.name}>
           <td>{gear.type}</td>
@@ -343,7 +342,12 @@ var GearList = React.createClass({
 });
 
 var App = React.createClass({
+  getInitialState: function () {
+    return {gears: theGears};
+  },
+
   onChange: function (gearPower) {
+    // TODO: Filter by user selection.
     console.log(gearPower);
   },
 
@@ -351,7 +355,7 @@ var App = React.createClass({
     return (
       <div className="app">
         <GearPowerSelector onChange={this.onChange}/>
-        <GearList />
+        <GearList gears={this.state.gears}/>
       </div>
     );
   }
