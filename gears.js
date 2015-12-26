@@ -343,10 +343,10 @@ var GearList = React.createClass({
 
 var App = React.createClass({
   getInitialState: function () {
-    return {gears: theGears};
+    return {gears: this.findGearsFor('(全て)')};
   },
 
-  onChange: function (gearPower) {
+  findGearsFor: function (gearPower) {
     var orderFromGearType = {
       'アタマ': 1,
       'フク': 2,
@@ -403,7 +403,11 @@ var App = React.createClass({
     var sortedGears = mapped.map(function (x){
       return matchedGears[x.index];
     });
-    this.setState({gears: sortedGears});
+    return sortedGears;
+  },
+
+  onChange: function (gearPower) {
+    this.setState({gears: this.findGearsFor(gearPower)});
   },
 
   render: function () {
