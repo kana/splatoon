@@ -308,19 +308,29 @@ var GearPowerSelector = React.createClass({
 });
 
 var GearList = React.createClass({
-  render: function () {
-    var gearNodes = this.props.gears.map(function (gear) {
-      return (
-        <tr key={gear.name}>
-          <td>{gear.type}</td>
-          <td>{gear.name}</td>
-          <td>{gear.main}</td>
-          <td>{gear.sub}</td>
-          <td>{gear.subrare}</td>
-          <td>{gear.brand}</td>
-        </tr>
-      );
+  nodeFromGear: function (gear) {
+    return (
+      <tr key={gear.name}>
+        <td>{gear.type}</td>
+        <td>{gear.name}</td>
+        <td>{gear.main}</td>
+        <td>{gear.sub}</td>
+        <td>{gear.subrare}</td>
+        <td>{gear.brand}</td>
+      </tr>
+    );
+  },
+
+  gearsOf: function (type) {
+    return this.props.gears.filter(function (gear) {
+      return gear.type === type;
     });
+  },
+
+  render: function () {
+    var headGearNodes = this.gearsOf('アタマ').map(this.nodeFromGear);
+    var clothGearNodes = this.gearsOf('フク').map(this.nodeFromGear);
+    var shoesGearNodes = this.gearsOf('クツ').map(this.nodeFromGear);
     return (
       <table className="gearList">
         <thead>
@@ -333,8 +343,14 @@ var GearList = React.createClass({
             <th>ブランド</th>
           </tr>
         </thead>
-        <tbody>
-          {gearNodes}
+        <tbody className="head">
+          {headGearNodes}
+        </tbody>
+        <tbody className="cloth">
+          {clothGearNodes}
+        </tbody>
+        <tbody className="shoes">
+          {shoesGearNodes}
         </tbody>
       </table>
     );

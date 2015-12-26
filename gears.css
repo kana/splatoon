@@ -38,3 +38,6 @@ td {
 tr:nth-child(even) {
   background: #f9f9f9;
 }
+tbody > tr:last-child {
+  border-bottom: 1ex solid #ccc;
+}
