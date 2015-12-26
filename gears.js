@@ -264,7 +264,9 @@ var GearPowerSelector = React.createClass({
   },
 
   onChange: function (e) {
-    this.setState({gearPower: e.target.value});
+    var newGearPower = e.target.value;
+    this.setState({gearPower: newGearPower});
+    this.props.onChange(newGearPower);
   },
 
   render: function () {
@@ -341,10 +343,14 @@ var GearList = React.createClass({
 });
 
 var App = React.createClass({
+  onChange: function (gearPower) {
+    console.log(gearPower);
+  },
+
   render: function () {
     return (
       <div className="app">
-        <GearPowerSelector />
+        <GearPowerSelector onChange={this.onChange}/>
         <GearList />
       </div>
     );
