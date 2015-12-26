@@ -258,4 +258,56 @@ var theGears = [  // {{{
   {type: "クツ",   name:  "クレイジーアローズ",           main: "ステルスジャンプ",         sub: "スペシャル増加量アップ",   subrare: "スペシャル時間延長",       brand: "ヤコ"}
 ];  // }}}
 
+var GearPowerSelector = React.createClass({
+  getInitialState: function () {
+    return {gearPower: '-'};
+  },
+
+  onChange: function (e) {
+    this.setState({gearPower: e.target.value});
+  },
+
+  render: function () {
+    return (
+      <div className="gearPowerSelector">
+        <label>
+          欲しいギアパワー:
+          <select onChange={this.onChange}>
+            <option>-</option>
+            <option>攻撃力アップ</option>
+            <option>防御力アップ</option>
+            <option>インク効率アップ(メイン)</option>
+            <option>インク効率アップ(サブ)</option>
+            <option>インク回復力アップ</option>
+            <option>ヒト移動速度アップ</option>
+            <option>イカダッシュ速度アップ</option>
+            <option>スペシャル増加量アップ</option>
+            <option>スペシャル時間延長</option>
+            <option>復活時間短縮</option>
+            <option>スペシャル減少量ダウン</option>
+            <option>スーパージャンプ時間短縮</option>
+            <option>ボム飛距離アップ</option>
+            <option>ラストスパート</option>
+            <option>スタートダッシュ</option>
+            <option>逆境強化</option>
+            <option>カムバック</option>
+            <option>マーキングガード</option>
+            <option>イカニンジャ</option>
+            <option>うらみ</option>
+            <option>スタートレーダー</option>
+            <option>ボムサーチ</option>
+            <option>安全シューズ</option>
+            <option>ステルスジャンプ</option>
+          </select>
+        </label>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <GearPowerSelector />,
+  document.getElementById('content')
+);
+
 // vim: et sts=2 sw=2 fdm=marker
