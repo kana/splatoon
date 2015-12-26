@@ -347,8 +347,11 @@ var App = React.createClass({
   },
 
   onChange: function (gearPower) {
-    // TODO: Filter by user selection.
-    console.log(gearPower);
+    this.setState({
+      gears: theGears.filter(function (gear) {
+        return gear.main === gearPower || gear.sub === gearPower;
+      })
+    });
   },
 
   render: function () {
