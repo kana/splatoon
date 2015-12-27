@@ -473,6 +473,12 @@ var App = React.createClass({
       gearPower: gearPower,
       gears: this.findGearsFor(gearPower)
     });
+    var id = this.idFromGearPower(gearPower);
+    history.replaceState(
+      null,
+      'Splatoon Gear Finder | ' + gearPower,
+      id === undefined ? location.pathname : '#' + id
+    );
   },
 
   render: function () {
