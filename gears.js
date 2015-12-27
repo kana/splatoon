@@ -362,7 +362,11 @@ var GearList = React.createClass({
 
 var App = React.createClass({
   getInitialState: function () {
-    return {gears: this.findGearsFor('(全て)')};
+    var gearPower = '(全て)';
+    return {
+      gearPower: gearPower,
+      gears: this.findGearsFor(gearPower),
+    };
   },
 
   findGearsFor: function (gearPower) {
