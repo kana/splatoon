@@ -316,9 +316,9 @@ var GearList = React.createClass({
       <tr key={gear.name}>
         <td>{gear.type}</td>
         <td>{gear.name}</td>
-        <td>{gear.main}</td>
-        <td>{gear.sub}</td>
-        <td>{gear.subrare}</td>
+        <td className={gear.main === this.props.gearPower ? 'matched' : ''}>{gear.main}</td>
+        <td className={gear.sub === this.props.gearPower ? 'matched' : ''}>{gear.sub}</td>
+        <td className={gear.subrare === this.props.gearPower ? 'matched' : ''}>{gear.subrare}</td>
         <td>{gear.brand}</td>
       </tr>
     );
@@ -426,14 +426,17 @@ var App = React.createClass({
   },
 
   onChange: function (gearPower) {
-    this.setState({gears: this.findGearsFor(gearPower)});
+    this.setState({
+      gearPower: gearPower,
+      gears: this.findGearsFor(gearPower)
+    });
   },
 
   render: function () {
     return (
       <div className="app">
         <GearPowerSelector onChange={this.onChange}/>
-        <GearList gears={this.state.gears}/>
+        <GearList gears={this.state.gears} gearPower={this.state.gearPower}/>
       </div>
     );
   }

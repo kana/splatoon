@@ -41,3 +41,7 @@ tr:nth-child(even) {
 tbody > tr:last-child {
   border-bottom: 1ex solid #ccc;
 }
+td.matched {
+  font-weight: bolder;
+  background: #fffff6;
+}
