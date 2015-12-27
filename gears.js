@@ -331,9 +331,9 @@ var GearList = React.createClass({
   },
 
   render: function () {
-    var headGearNodes = this.gearsOf('アタマ').map(this.nodeFromGear);
-    var clothGearNodes = this.gearsOf('フク').map(this.nodeFromGear);
-    var shoesGearNodes = this.gearsOf('クツ').map(this.nodeFromGear);
+    var headgearNodes = this.gearsOf('アタマ').map(this.nodeFromGear);
+    var clothingNodes = this.gearsOf('フク').map(this.nodeFromGear);
+    var shoesNodes = this.gearsOf('クツ').map(this.nodeFromGear);
     return (
       <table className="gearList">
         <thead>
@@ -346,14 +346,14 @@ var GearList = React.createClass({
             <th>ブランド</th>
           </tr>
         </thead>
-        <tbody className="head">
-          {headGearNodes}
+        <tbody className="headgear">
+          {headgearNodes}
         </tbody>
-        <tbody className="cloth">
-          {clothGearNodes}
+        <tbody className="clothing">
+          {clothingNodes}
         </tbody>
         <tbody className="shoes">
-          {shoesGearNodes}
+          {shoesNodes}
         </tbody>
       </table>
     );
