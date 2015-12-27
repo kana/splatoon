@@ -45,3 +45,9 @@ td.matched {
   font-weight: bolder;
   background: #fffff6;
 }
+tr:hover {
+  background: #fffff6;
+}
+tr:hover > td.matched {
+  background: #ffffcc;
+}
