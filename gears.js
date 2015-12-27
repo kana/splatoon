@@ -362,11 +362,50 @@ var GearList = React.createClass({
 
 var App = React.createClass({
   getInitialState: function () {
-    var gearPower = '(全て)';
+    var gearPower = this.gearPowerFromId(location.hash.substring(1));
     return {
       gearPower: gearPower,
       gears: this.findGearsFor(gearPower),
     };
+  },
+
+  idFromGearPowerTable: {
+    '攻撃力アップ': 'damage-up',
+    '防御力アップ': 'defense-up',
+    'インク効率アップ(メイン)': 'ink-saver-main',
+    'インク効率アップ(サブ)': 'ink-saver-sub',
+    'インク回復力アップ': 'ink-recovery-up',
+    'ヒト移動速度アップ': 'run-speed-up',
+    'イカダッシュ速度アップ': 'swim-speed-up',
+    'スペシャル増加量アップ': 'special-charge-up',
+    'スペシャル時間延長': 'special-duration-up',
+    '復活時間短縮': 'quick-respawn',
+    'スペシャル減少量ダウン': 'special-saver',
+    'スーパージャンプ時間短縮': 'quick-super-jump',
+    'ボム飛距離アップ': 'bomb-range-up',
+    'ラストスパート': 'last-ditch-effort',
+    'スタートダッシュ': 'opening-gambit',
+    '逆境強化': 'tenacity',
+    'カムバック': 'comeback',
+    'マーキングガード': 'cold-blooded',
+    'イカニンジャ': 'ninja-squid',
+    'うらみ': 'haunt',
+    'スタートレーダー': 'recon',
+    'ボムサーチ': 'bomb-sniffer',
+    '安全シューズ': 'ink-resistance-up',
+    'ステルスジャンプ': 'stealth-jump'
+  },
+
+  idFromGearPower: function (gearPower) {
+    return this.idFromGearPowerTable[gearPower];
+  },
+
+  gearPowerFromId: function (id) {
+    for (var gearPower in this.idFromGearPowerTable) {
+      if (id === this.idFromGearPowerTable[gearPower])
+        return gearPower;
+    }
+    return '(全て)';
   },
 
   findGearsFor: function (gearPower) {
