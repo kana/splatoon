@@ -262,14 +262,8 @@ var theGears = [  // {{{
 ];  // }}}
 
 var GearPowerSelector = React.createClass({
-  getInitialState: function () {
-    return {gearPower: this.props.gearPower};
-  },
-
   onChange: function (e) {
-    var newGearPower = e.target.value;
-    this.setState({gearPower: newGearPower});
-    this.props.onChange(newGearPower);
+    this.props.onChange(e.target.value);
   },
 
   render: function () {
@@ -277,7 +271,7 @@ var GearPowerSelector = React.createClass({
       <div className="gearPowerSelector">
         <label>
           欲しいギアパワー:
-          <select onChange={this.onChange} value={this.state.gearPower}>
+          <select onChange={this.onChange} value={this.props.gearPower}>
             <option value="(全て)">(全て)</option>
             <option value="攻撃力アップ">攻撃力アップ</option>
             <option value="防御力アップ">防御力アップ</option>
