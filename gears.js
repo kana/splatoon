@@ -1,3 +1,6 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var theGears = [  // {{{
   {type: "アタマ", name: "スカッシュバンド",              main: "攻撃力アップ",             sub: "スーパージャンプ時間短縮", subrare: "復活時間短縮",             brand: "アイロニック"},
   {type: "アタマ", name: "サムライヘルメット",            main: "攻撃力アップ",             sub: "-",                        subrare: "-",                        brand: "amiibo"},
