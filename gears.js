@@ -305,6 +305,30 @@ var GearPowerSelector = React.createClass({
 });
 
 var GearList = React.createClass({
+  gearsOf: function (type) {
+    return this.props.gears.filter(function (gear) {
+      return gear.type === type;
+    });
+  },
+
+  render: function () {
+    return (
+      <table className="gearList">
+        <GearListOfType type="アタマ"
+          gearPower={this.props.gearPower}
+          gears={this.gearsOf("アタマ")}/>
+        <GearListOfType type="フク"
+          gearPower={this.props.gearPower}
+          gears={this.gearsOf("フク")}/>
+        <GearListOfType type="クツ"
+          gearPower={this.props.gearPower}
+          gears={this.gearsOf("クツ")}/>
+      </table>
+    );
+  }
+});
+
+var GearListOfType = React.createClass({
   nodeFromGear: function (gear) {
     return (
       <tr key={gear.name}>
@@ -317,58 +341,21 @@ var GearList = React.createClass({
     );
   },
 
-  gearsOf: function (type) {
-    return this.props.gears.filter(function (gear) {
-      return gear.type === type;
-    });
-  },
-
   render: function () {
-    var headgearNodes = this.gearsOf('アタマ').map(this.nodeFromGear);
-    var clothingNodes = this.gearsOf('フク').map(this.nodeFromGear);
-    var shoesNodes = this.gearsOf('クツ').map(this.nodeFromGear);
     return (
-      <table className="gearList">
-        <tbody className="headgear">
-          <tr>
-            <th colSpan="5">アタマ</th>
-          </tr>
-          <tr>
-            <th>名前</th>
-            <th>メイン</th>
-            <th>サブ+</th>
-            <th>サブ-</th>
-            <th>ブランド</th>
-          </tr>
-          {headgearNodes}
-        </tbody>
-        <tbody className="clothing">
-          <tr>
-            <th colSpan="5">フク</th>
-          </tr>
-          <tr>
-            <th>名前</th>
-            <th>メイン</th>
-            <th>サブ+</th>
-            <th>サブ-</th>
-            <th>ブランド</th>
-          </tr>
-          {clothingNodes}
-        </tbody>
-        <tbody className="shoes">
-          <tr>
-            <th colSpan="5">クツ</th>
-          </tr>
-          <tr>
-            <th>名前</th>
-            <th>メイン</th>
-            <th>サブ+</th>
-            <th>サブ-</th>
-            <th>ブランド</th>
-          </tr>
-          {shoesNodes}
-        </tbody>
-      </table>
+      <tbody>
+        <tr>
+          <th colSpan="5">{this.props.type}</th>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <th>メイン</th>
+          <th>サブ+</th>
+          <th>サブ-</th>
+          <th>ブランド</th>
+        </tr>
+        {this.props.gears.map(this.nodeFromGear)}
+      </tbody>
     );
   }
 });
