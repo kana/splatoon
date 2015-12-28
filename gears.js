@@ -308,7 +308,6 @@ var GearList = React.createClass({
   nodeFromGear: function (gear) {
     return (
       <tr key={gear.name}>
-        <td>{gear.type}</td>
         <td>{gear.name}</td>
         <td className={gear.main === this.props.gearPower ? 'matched' : ''}>{gear.main}</td>
         <td className={gear.sub === this.props.gearPower ? 'matched' : ''}>{gear.sub}</td>
@@ -330,23 +329,43 @@ var GearList = React.createClass({
     var shoesNodes = this.gearsOf('クツ').map(this.nodeFromGear);
     return (
       <table className="gearList">
-        <thead>
+        <tbody className="headgear">
           <tr>
-            <th>部位</th>
+            <th colSpan="5">アタマ</th>
+          </tr>
+          <tr>
             <th>名前</th>
             <th>メイン</th>
             <th>サブ+</th>
             <th>サブ-</th>
             <th>ブランド</th>
           </tr>
-        </thead>
-        <tbody className="headgear">
           {headgearNodes}
         </tbody>
         <tbody className="clothing">
+          <tr>
+            <th colSpan="5">フク</th>
+          </tr>
+          <tr>
+            <th>名前</th>
+            <th>メイン</th>
+            <th>サブ+</th>
+            <th>サブ-</th>
+            <th>ブランド</th>
+          </tr>
           {clothingNodes}
         </tbody>
         <tbody className="shoes">
+          <tr>
+            <th colSpan="5">クツ</th>
+          </tr>
+          <tr>
+            <th>名前</th>
+            <th>メイン</th>
+            <th>サブ+</th>
+            <th>サブ-</th>
+            <th>ブランド</th>
+          </tr>
           {shoesNodes}
         </tbody>
       </table>
