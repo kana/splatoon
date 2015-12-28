@@ -4,47 +4,66 @@ body {
   font-family: sans-serif;
 }
 
+
+
+
 h1 {
   text-align: center;
   font-size: 248%;
   margin: 1em 0;
 }
 
+
+
+
 #content {
   text-align: center;
 }
+
+
+
 
 .gearPowerSelector {
   margin: 1em 0;
 }
 
+
+
+
 .gearList {
   display: inline-block;
   border-collapse: collapse;
 }
+
 th, td {
   border: 1px solid #ccc;
   padding: 0 0.25em;
 }
+
 th {
   font-weight: bolder;
   background: #555;
   color: #fff;
   border-color: #999;
 }
+
 td {
   text-align: left;
 }
+
 tr:nth-child(even) {
   background: #f9f9f9;
 }
+
 td.matched {
   font-weight: bolder;
   background: #fffff6;
 }
+
 tr:hover {
   background: #fffff6;
 }
+
 tr:hover > td.matched {
   background: #ffffcc;
 }
