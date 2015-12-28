@@ -24,7 +24,7 @@ h1 {
 }
 th, td {
   border: 1px solid #ccc;
-  padding: 0 1em;
+  padding: 0 0.25em;
 }
 th {
   font-weight: bolder;
