@@ -311,10 +311,7 @@ var App = React.createClass({
   getInitialState: function () {
     return {
       gearPowers: [],
-      gearSets: [
-        // A dummy set to check rendering.
-        {headgear: theGears[0], clothing: theGears[1], shoes: theGears[2]},
-      ],
+      gearSets: [],
     };
   },
 
