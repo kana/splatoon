@@ -281,7 +281,7 @@ var GearPowerSetSelector = React.createClass({
       <div className="gearPowerSetSelector">
         {this.props.gearPowers.map(this.nodeFromGearPower)}
         {this.props.gearPowers.length < 6 &&
-          this.nodeFromGearPower(undefined, this.props.gearPowers.length)}
+          this.nodeFromGearPower("-", this.props.gearPowers.length)}
       </div>
     );
   }
@@ -298,7 +298,7 @@ var GearPowerSelector = React.createClass({
         <label>
           欲しいギアパワー:
           <select onChange={this.onChange} value={this.props.gearPower}>
-            <option value="(全て)">(全て)</option>
+            <option value="-">-</option>
             <option value="攻撃力アップ">攻撃力アップ</option>
             <option value="防御力アップ">防御力アップ</option>
             <option value="インク効率アップ(メイン)">インク効率アップ(メイン)</option>
