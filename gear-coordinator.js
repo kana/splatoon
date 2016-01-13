@@ -391,9 +391,9 @@ var App = React.createClass({
         return false;
       });
 
-      var extendedGetSets = this.extendGearSets(gearSets, gearPower);
-
-      gearSets = filteredGearSets.concat(extendedGetSets);
+      gearSets = filteredGearSets.length > 0 ?
+        filteredGearSets :
+        filteredGearSets.concat(this.extendGearSets(gearSets, gearPower));
     }
 
     return gearSets.map(function (gearSet) {
