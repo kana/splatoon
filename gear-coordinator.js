@@ -391,54 +391,9 @@ var App = React.createClass({
         return false;
       });
 
-      var extendedGetSetsList = gearSets.map(function (gearSet) {
-        var gearSetsList = [];
-        if (gearSet.headgear === undefined) {
-          gearSetsList.push(
-            theGears.filter(function (gear) {
-              return gear.type === "アタマ" &&
-                     (gear.main === gearPower || gear.sub === gearPower);
-            }).map(function (gear) {
-              return {
-                headgear: gear,
-                clothing: gearSet.clothing,
-                shoes: gearSet.shoes,
-              };
-            })
-          );
-        }
-        if (gearSet.clothing === undefined) {
-          gearSetsList.push(
-            theGears.filter(function (gear) {
-              return gear.type === "フク" &&
-                     (gear.main === gearPower || gear.sub === gearPower);
-            }).map(function (gear) {
-              return {
-                headgear: gearSet.headgear,
-                clothing: gear,
-                shoes: gearSet.shoes,
-              };
-            })
-          );
-        }
-        if (gearSet.shoes === undefined) {
-          gearSetsList.push(
-            theGears.filter(function (gear) {
-              return gear.type === "クツ" &&
-                     (gear.main === gearPower || gear.sub === gearPower);
-            }).map(function (gear) {
-              return {
-                headgear: gearSet.headgear,
-                clothing: gearSet.clothing,
-                shoes: gear,
-              };
-            })
-          );
-        }
-        return [].concat.apply([], gearSetsList);
-      });
+      var extendedGetSets = this.extendGearSets(gearSets, gearPower);
 
-      gearSets = [].concat.apply([], [filteredGearSets].concat(extendedGetSetsList));
+      gearSets = filteredGearSets.concat(extendedGetSets);
     }
 
     return gearSets.map(function (gearSet) {
@@ -448,6 +403,56 @@ var App = React.createClass({
         shoes: gearSet.shoes || anyGear,
       };
     });
+  },
+
+  extendGearSets: function (gearSets, gearPower) {
+    var extendedGetSetsList = gearSets.map(function (gearSet) {
+      var gearSetsList = [];
+      if (gearSet.headgear === undefined) {
+        gearSetsList.push(
+          theGears.filter(function (gear) {
+            return gear.type === "アタマ" &&
+                   (gear.main === gearPower || gear.sub === gearPower);
+          }).map(function (gear) {
+            return {
+              headgear: gear,
+              clothing: gearSet.clothing,
+              shoes: gearSet.shoes,
+            };
+          })
+        );
+      }
+      if (gearSet.clothing === undefined) {
+        gearSetsList.push(
+          theGears.filter(function (gear) {
+            return gear.type === "フク" &&
+                   (gear.main === gearPower || gear.sub === gearPower);
+          }).map(function (gear) {
+            return {
+              headgear: gearSet.headgear,
+              clothing: gear,
+              shoes: gearSet.shoes,
+            };
+          })
+        );
+      }
+      if (gearSet.shoes === undefined) {
+        gearSetsList.push(
+          theGears.filter(function (gear) {
+            return gear.type === "クツ" &&
+                   (gear.main === gearPower || gear.sub === gearPower);
+          }).map(function (gear) {
+            return {
+              headgear: gearSet.headgear,
+              clothing: gearSet.clothing,
+              shoes: gear,
+            };
+          })
+        );
+      }
+      return [].concat.apply([], gearSetsList);
+    });
+    return [].concat.apply([], extendedGetSetsList);
   },
 
   onChangeGearPower1: function (gearPower) {
