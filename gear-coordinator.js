@@ -359,7 +359,28 @@ var App = React.createClass({
   },
 
   findGearSetsFor: function (gearPowers) {
-    return [];  // TODO: Implement.
+    if (gearPowers.length < 1)
+      return [];
+
+    var gearSets =
+      theGears.filter(function (gear) {
+        return gear.main === gearPowers[0] || gear.sub === gearPowers[0];
+      })
+      .map(function (gear) {
+        if (gear.type === "アタマ") {
+          return {headgear: gear};
+        } else if (gear.type === "フク") {
+          return {clothing: gear};
+        } else {  // gear.type === "クツ"
+          return {shoes: gear};
+        }
+      });
+
+    for (var i = 1; i < gearPowers.length; i++) {
+      // TODO: List sets matching two or more gear powers.
+    }
+
+    return gearSets;
   },
 
   onChangeGearPower1: function (gearPower) {
