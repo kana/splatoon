@@ -267,7 +267,11 @@ var GearPowerSetSelector = React.createClass({
   onChange: function (value, index) {
     var newGearPowers = this.props.gearPowers.slice();
     newGearPowers[index] = value;
-    this.props.onChange(newGearPowers);
+    this.props.onChange(
+      newGearPowers.filter(function (gearPower) {
+        return gearPower !== "-";
+      })
+    );
   },
 
   nodeFromGearPower: function (gearPower, i) {
