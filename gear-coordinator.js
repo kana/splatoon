@@ -358,9 +358,23 @@ var App = React.createClass({
     };
   },
 
+  findGearSetsFor: function (gearPowers) {
+    return [];  // TODO: Implement.
+  },
+
+  onChangeGearPower1: function (gearPower) {
+    var newGearPowers = this.state.gearPowers.slice();
+    newGearPowers[0] = gearPower;
+    this.setState({
+      gearPowers: newGearPowers,
+      gearSets: this.findGearSetsFor(newGearPowers),
+    });
+  },
+
   render: function () {
     return (
       <div className="app">
+        <GearPowerSelector onChange={this.onChangeGearPower1} gearPower={this.state.gearPowers[0]}/>
         <GearSetList gearSets={this.state.gearSets} gearPowers={this.state.gearPowers}/>
       </div>
     );
