@@ -379,7 +379,66 @@ var App = React.createClass({
       });
 
     for (var i = 1; i < gearPowers.length; i++) {
-      // TODO: List sets matching two or more gear powers.
+      var gearPower = gearPowers[i];
+
+      var filteredGearSets = gearSets.filter(function (gearSet) {
+        for (var type in gearSet) {
+          if (gearSet[type]) {
+            return gearSet[type].main === gearPower ||
+                   gearSet[type].sub === gearPower;
+          }
+        }
+        return false;
+      });
+
+      var extendedGetSetsList = gearSets.map(function (gearSet) {
+        var gearSetsList = [];
+        if (gearSet.headgear === undefined) {
+          gearSetsList.push(
+            theGears.filter(function (gear) {
+              return gear.type === "アタマ" &&
+                     (gear.main === gearPower || gear.sub === gearPower);
+            }).map(function (gear) {
+              return {
+                headgear: gear,
+                clothing: gearSet.clothing,
+                shoes: gearSet.shoes,
+              };
+            })
+          );
+        }
+        if (gearSet.clothing === undefined) {
+          gearSetsList.push(
+            theGears.filter(function (gear) {
+              return gear.type === "フク" &&
+                     (gear.main === gearPower || gear.sub === gearPower);
+            }).map(function (gear) {
+              return {
+                headgear: gearSet.headgear,
+                clothing: gear,
+                shoes: gearSet.shoes,
+              };
+            })
+          );
+        }
+        if (gearSet.shoes === undefined) {
+          gearSetsList.push(
+            theGears.filter(function (gear) {
+              return gear.type === "クツ" &&
+                     (gear.main === gearPower || gear.sub === gearPower);
+            }).map(function (gear) {
+              return {
+                headgear: gearSet.headgear,
+                clothing: gearSet.clothing,
+                shoes: gear,
+              };
+            })
+          );
+        }
+        return [].concat.apply([], gearSetsList);
+      });
+
+      gearSets = [].concat.apply([], [filteredGearSets].concat(extendedGetSetsList));
     }
 
     return gearSets.map(function (gearSet) {
