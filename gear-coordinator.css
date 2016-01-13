@@ -23,6 +23,13 @@ h1 {
 
 
 
+.gearPowerSelector {
+  display: inline;
+}
+
+
+
+
 .gearSetList {
   display: inline-block;
   border-collapse: collapse;

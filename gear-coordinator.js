@@ -283,6 +283,7 @@ var GearPowerSetSelector = React.createClass({
   render: function () {
     return (
       <div className="gearPowerSetSelector">
+        欲しいギアパワー:
         {this.props.gearPowers.map(this.nodeFromGearPower)}
         {this.props.gearPowers.length < 6 &&
           this.nodeFromGearPower("-", this.props.gearPowers.length)}
@@ -299,36 +300,33 @@ var GearPowerSelector = React.createClass({
   render: function () {
     return (
       <div className="gearPowerSelector">
-        <label>
-          欲しいギアパワー:
-          <select onChange={this.onChange} value={this.props.gearPower}>
-            <option value="-">-</option>
-            <option value="攻撃力アップ">攻撃力アップ</option>
-            <option value="防御力アップ">防御力アップ</option>
-            <option value="インク効率アップ(メイン)">インク効率アップ(メイン)</option>
-            <option value="インク効率アップ(サブ)">インク効率アップ(サブ)</option>
-            <option value="インク回復力アップ">インク回復力アップ</option>
-            <option value="ヒト移動速度アップ">ヒト移動速度アップ</option>
-            <option value="イカダッシュ速度アップ">イカダッシュ速度アップ</option>
-            <option value="スペシャル増加量アップ">スペシャル増加量アップ</option>
-            <option value="スペシャル時間延長">スペシャル時間延長</option>
-            <option value="復活時間短縮">復活時間短縮</option>
-            <option value="スペシャル減少量ダウン">スペシャル減少量ダウン</option>
-            <option value="スーパージャンプ時間短縮">スーパージャンプ時間短縮</option>
-            <option value="ボム飛距離アップ">ボム飛距離アップ</option>
-            <option value="ラストスパート">ラストスパート</option>
-            <option value="スタートダッシュ">スタートダッシュ</option>
-            <option value="逆境強化">逆境強化</option>
-            <option value="カムバック">カムバック</option>
-            <option value="マーキングガード">マーキングガード</option>
-            <option value="イカニンジャ">イカニンジャ</option>
-            <option value="うらみ">うらみ</option>
-            <option value="スタートレーダー">スタートレーダー</option>
-            <option value="ボムサーチ">ボムサーチ</option>
-            <option value="安全シューズ">安全シューズ</option>
-            <option value="ステルスジャンプ">ステルスジャンプ</option>
-          </select>
-        </label>
+        <select onChange={this.onChange} value={this.props.gearPower}>
+          <option value="-">-</option>
+          <option value="攻撃力アップ">攻撃力アップ</option>
+          <option value="防御力アップ">防御力アップ</option>
+          <option value="インク効率アップ(メイン)">インク効率アップ(メイン)</option>
+          <option value="インク効率アップ(サブ)">インク効率アップ(サブ)</option>
+          <option value="インク回復力アップ">インク回復力アップ</option>
+          <option value="ヒト移動速度アップ">ヒト移動速度アップ</option>
+          <option value="イカダッシュ速度アップ">イカダッシュ速度アップ</option>
+          <option value="スペシャル増加量アップ">スペシャル増加量アップ</option>
+          <option value="スペシャル時間延長">スペシャル時間延長</option>
+          <option value="復活時間短縮">復活時間短縮</option>
+          <option value="スペシャル減少量ダウン">スペシャル減少量ダウン</option>
+          <option value="スーパージャンプ時間短縮">スーパージャンプ時間短縮</option>
+          <option value="ボム飛距離アップ">ボム飛距離アップ</option>
+          <option value="ラストスパート">ラストスパート</option>
+          <option value="スタートダッシュ">スタートダッシュ</option>
+          <option value="逆境強化">逆境強化</option>
+          <option value="カムバック">カムバック</option>
+          <option value="マーキングガード">マーキングガード</option>
+          <option value="イカニンジャ">イカニンジャ</option>
+          <option value="うらみ">うらみ</option>
+          <option value="スタートレーダー">スタートレーダー</option>
+          <option value="ボムサーチ">ボムサーチ</option>
+          <option value="安全シューズ">安全シューズ</option>
+          <option value="ステルスジャンプ">ステルスジャンプ</option>
+        </select>
       </div>
     );
   }
