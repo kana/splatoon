@@ -334,6 +334,7 @@ var GearPowerSelector = React.createClass({
 
 var GearSetList = React.createClass({
   nodeFromGearSet: function (gearSet) {
+    // TODO: Highlight matched gear powers with distinct colors.
     return (
       <tr key={gearSet.headgear.name + ':' + gearSet.clothing.name + ':' + gearSet.shoes.name}>
         <td>{gearSet.headgear.name}</td>
@@ -388,6 +389,11 @@ var App = React.createClass({
 
   findGearSetsFor: function (gearPowers) {
     // TODO: Support specifying same gear power many times.
+    //   (it's necesary to memoize which slot is already matched.)
+    // TODO: Fail to list gear sets for five or more gear powers?
+    //   Example combination:
+    //     逆境強化, スペシャル減少量ダウン,
+    //     イカダッシュ速度アップ, スペシャル時間延長
     if (gearPowers.length < 1)
       return [];
 
