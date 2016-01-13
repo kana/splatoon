@@ -361,6 +361,7 @@ var App = React.createClass({
   },
 
   findGearSetsFor: function (gearPowers) {
+    // TODO: Support specifying same gear power many times.
     if (gearPowers.length < 1)
       return [];
 
@@ -396,6 +397,7 @@ var App = React.createClass({
         filteredGearSets.concat(this.extendGearSets(gearSets, gearPower));
     }
 
+    // TODO: Sort sets well.
     return gearSets.map(function (gearSet) {
       return {
         headgear: gearSet.headgear || anyGear,
@@ -406,6 +408,7 @@ var App = React.createClass({
   },
 
   extendGearSets: function (gearSets, gearPower) {
+    // TODO: Simplify similar code blocks.
     var extendedGetSetsList = gearSets.map(function (gearSet) {
       var gearSetsList = [];
       if (gearSet.headgear === undefined) {
@@ -455,6 +458,7 @@ var App = React.createClass({
     return [].concat.apply([], extendedGetSetsList);
   },
 
+  // TODO: Support multiple selectors.
   onChangeGearPower1: function (gearPower) {
     var newGearPowers = this.state.gearPowers.slice();
     newGearPowers[0] = gearPower;
