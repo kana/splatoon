@@ -268,9 +268,9 @@ var GearPowerSetSelector = React.createClass({
     this.props.onChange([]);
   },
 
-  nodeFromGearPower: function (gearPower) {
+  nodeFromGearPower: function (gearPower, i) {
     return (
-      <GearPowerSelector onChange={this.onChange} gearPower={gearPower}/>
+      <GearPowerSelector key={i} onChange={this.onChange} gearPower={gearPower}/>
     );
   },
 
@@ -278,6 +278,8 @@ var GearPowerSetSelector = React.createClass({
     return (
       <div className="gearPowerSetSelector">
         {this.props.gearPowers.map(this.nodeFromGearPower)}
+        {this.props.gearPowers.length < 6 &&
+          this.nodeFromGearPower(undefined, this.props.gearPowers.length)}
       </div>
     );
   }
