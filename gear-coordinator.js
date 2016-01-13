@@ -263,6 +263,26 @@ var theGears = [  // {{{
 
 var anyGear = {type: "-", name: "(なんでも)", main: "-", sub: "-", subrare: "-", brand: "-"};
 
+var GearPowerSetSelector = React.createClass({
+  onChange: function (e) {
+    this.props.onChange([]);
+  },
+
+  nodeFromGearPower: function (gearPower) {
+    return (
+      <GearPowerSelector onChange={this.onChange} gearPower={gearPower}/>
+    );
+  },
+
+  render: function () {
+    return (
+      <div className="gearPowerSetSelector">
+        {this.props.gearPowers.map(this.nodeFromGearPower)}
+      </div>
+    );
+  }
+});
+
 var GearPowerSelector = React.createClass({
   onChange: function (e) {
     this.props.onChange(e.target.value);
@@ -458,10 +478,7 @@ var App = React.createClass({
     return [].concat.apply([], extendedGetSetsList);
   },
 
-  // TODO: Support multiple selectors.
-  onChangeGearPower1: function (gearPower) {
-    var newGearPowers = this.state.gearPowers.slice();
-    newGearPowers[0] = gearPower;
+  onChangeGearPowers: function (newGearPowers) {
     this.setState({
       gearPowers: newGearPowers,
       gearSets: this.findGearSetsFor(newGearPowers),
@@ -471,7 +488,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="app">
-        <GearPowerSelector onChange={this.onChangeGearPower1} gearPower={this.state.gearPowers[0]}/>
+        <GearPowerSetSelector onChange={this.onChangeGearPowers} gearPowers={this.state.gearPowers}/>
         <GearSetList gearSets={this.state.gearSets} gearPowers={this.state.gearPowers}/>
       </div>
     );
