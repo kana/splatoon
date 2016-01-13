@@ -261,6 +261,8 @@ var theGears = [  // {{{
   {type: "クツ",   name:  "クレイジーアローズ",           main: "ステルスジャンプ",         sub: "スペシャル増加量アップ",   subrare: "スペシャル時間延長",       brand: "ヤコ"}
 ];  // }}}
 
+var anyGear = {type: "-", name: "(なんでも)", main: "-", sub: "-", subrare: "-", brand: "-"};
+
 var GearPowerSelector = React.createClass({
   onChange: function (e) {
     this.props.onChange(e.target.value);
@@ -380,7 +382,13 @@ var App = React.createClass({
       // TODO: List sets matching two or more gear powers.
     }
 
-    return gearSets;
+    return gearSets.map(function (gearSet) {
+      return {
+        headgear: gearSet.headgear || anyGear,
+        clothing: gearSet.clothing || anyGear,
+        shoes: gearSet.shoes || anyGear,
+      };
+    });
   },
 
   onChangeGearPower1: function (gearPower) {
