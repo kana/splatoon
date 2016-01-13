@@ -264,13 +264,15 @@ var theGears = [  // {{{
 var anyGear = {type: "-", name: "(なんでも)", main: "-", sub: "-", subrare: "-", brand: "-"};
 
 var GearPowerSetSelector = React.createClass({
-  onChange: function (e) {
-    this.props.onChange([]);
+  onChange: function (value, index) {
+    var newGearPowers = this.props.gearPowers.slice();
+    newGearPowers[index] = value;
+    this.props.onChange(newGearPowers);
   },
 
   nodeFromGearPower: function (gearPower, i) {
     return (
-      <GearPowerSelector key={i} onChange={this.onChange} gearPower={gearPower}/>
+      <GearPowerSelector key={i} index={i} onChange={this.onChange} gearPower={gearPower}/>
     );
   },
 
@@ -287,7 +289,7 @@ var GearPowerSetSelector = React.createClass({
 
 var GearPowerSelector = React.createClass({
   onChange: function (e) {
-    this.props.onChange(e.target.value);
+    this.props.onChange(e.target.value, this.props.index);
   },
 
   render: function () {
