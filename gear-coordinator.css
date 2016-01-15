@@ -23,16 +23,27 @@ h1 {
 
 
 
+.gearPowerSetSelector {
+  display: inline-block;
+}
+
+.gearPowerSetSelector > .label {
+  float: left;
+}
+
+.gearPowerSetSelector > .forms {
+  float: right;
+}
+
 .gearPowerSelector {
-  display: inline;
 }
 
 
 
 
 .gearSetList {
-  display: inline-block;
   border-collapse: collapse;
+  margin: 1em auto;
 }
 
 th, td {

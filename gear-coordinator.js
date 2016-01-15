@@ -283,10 +283,14 @@ var GearPowerSetSelector = React.createClass({
   render: function () {
     return (
       <div className="gearPowerSetSelector">
-        欲しいギアパワー:
-        {this.props.gearPowers.map(this.nodeFromGearPower)}
-        {this.props.gearPowers.length < 6 &&
-          this.nodeFromGearPower("-", this.props.gearPowers.length)}
+        <div className="label">
+          欲しいギアパワー:
+        </div>
+        <div className="forms">
+          {this.props.gearPowers.map(this.nodeFromGearPower)}
+          {this.props.gearPowers.length < 6 &&
+            this.nodeFromGearPower("-", this.props.gearPowers.length)}
+        </div>
       </div>
     );
   }
