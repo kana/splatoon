@@ -432,8 +432,7 @@ var App = React.createClass({
       );
     }
 
-    // TODO: Sort sets well.
-    return gearSets.map(function (gearSet) {
+    return this.sortGearSets(gearSets).map(function (gearSet) {
       return {
         headgear: gearSet.headgear || anyGear,
         clothing: gearSet.clothing || anyGear,
@@ -510,6 +509,63 @@ var App = React.createClass({
                gearSet.shoes === (g.shoes || gearSet.shoes);
       });
     });
+  },
+
+  sortGearSets: function (gearSets) {
+    var orderFromGearPower = {
+      '攻撃力アップ': '01',
+      '防御力アップ': '02',
+      'インク効率アップ(メイン)': '03',
+      'インク効率アップ(サブ)': '04',
+      'インク回復力アップ': '05',
+      'ヒト移動速度アップ': '06',
+      'イカダッシュ速度アップ': '07',
+      'スペシャル増加量アップ': '08',
+      'スペシャル時間延長': '09',
+      '復活時間短縮': '10',
+      'スペシャル減少量ダウン': '11',
+      'スーパージャンプ時間短縮': '12',
+      'ボム飛距離アップ': '13',
+      'ラストスパート': '14',
+      'スタートダッシュ': '15',
+      '逆境強化': '16',
+      'カムバック': '17',
+      'マーキングガード': '18',
+      'イカニンジャ': '19',
+      'うらみ': '20',
+      'スタートレーダー': '21',
+      'ボムサーチ': '22',
+      '安全シューズ': '23',
+      'ステルスジャンプ': '24',
+      '-': '99'
+    };
+    var mapped = gearSets.map(function (gearSet, i) {
+      return {
+        index: i,
+        value: [
+          gearSet.headgear === undefined ? 1 : 2,
+          gearSet.clothing === undefined ? 1 : 2,
+          gearSet.shoes === undefined ? 1 : 2,
+          orderFromGearPower[gearSet.headgear ? gearSet.headgear.main : '-'],
+          orderFromGearPower[gearSet.headgear ? gearSet.headgear.sub : '-'],
+          orderFromGearPower[gearSet.clothing ? gearSet.clothing.main : '-'],
+          orderFromGearPower[gearSet.clothing ? gearSet.clothing.sub : '-'],
+          orderFromGearPower[gearSet.shoes ? gearSet.shoes.main : '-'],
+          orderFromGearPower[gearSet.shoes ? gearSet.shoes.sub : '-'],
+          gearSet.headgear ? gearSet.headgear.name : '',
+          gearSet.clothing ? gearSet.clothing.name : '',
+          gearSet.shoes ? gearSet.shoes.name : '',
+        ].join(':')
+      };
+    });
+    mapped.sort(function (a, b) {
+      return a.value < b.value ? -1 :
+             a.value === b.value ? 0 : 1;
+    });
+    var sortedGearSets = mapped.map(function (x){
+      return gearSets[x.index];
+    });
+    return sortedGearSets;
   },
 
   onChangeGearPowers: function (newGearPowers) {
