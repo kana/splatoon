@@ -426,9 +426,10 @@ var App = React.createClass({
         return false;
       });
 
-      gearSets = filteredGearSets.length > 0 ?
-        filteredGearSets :
-        filteredGearSets.concat(this.extendGearSets(gearSets, gearPower));
+      gearSets = this.deleteVerboseGearSets(
+        filteredGearSets
+        .concat(this.extendGearSets(gearSets, gearPower))
+      );
     }
 
     // TODO: Sort sets well.
@@ -490,6 +491,25 @@ var App = React.createClass({
       return [].concat.apply([], gearSetsList);
     });
     return [].concat.apply([], extendedGetSetsList);
+  },
+
+  deleteVerboseGearSets: function (gearSets) {
+    var genericGearSets = gearSets.filter(function (gearSet) {
+      return gearSet.headgear === undefined ||
+             gearSet.clothing === undefined ||
+             gearSet.shoes === undefined;
+    });
+    if (genericGearSets.length === 0)
+      return gearSets;
+
+    return gearSets.filter(function (gearSet) {
+      return !genericGearSets.some(function (g) {
+        return gearSet !== g &&
+               gearSet.headgear === (g.headgear || gearSet.headgear) &&
+               gearSet.clothing === (g.clothing || gearSet.clothing) &&
+               gearSet.shoes === (g.shoes || gearSet.shoes);
+      });
+    });
   },
 
   onChangeGearPowers: function (newGearPowers) {
