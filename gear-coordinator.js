@@ -394,10 +394,6 @@ var App = React.createClass({
   findGearSetsFor: function (gearPowers) {
     // TODO: Support specifying same gear power many times.
     //   (it's necesary to memoize which slot is already matched.)
-    // TODO: Fail to list gear sets for five or more gear powers?
-    //   Example combination:
-    //     逆境強化, スペシャル減少量ダウン,
-    //     イカダッシュ速度アップ, スペシャル時間延長
     if (gearPowers.length < 1)
       return [];
 
@@ -420,9 +416,11 @@ var App = React.createClass({
 
       var filteredGearSets = gearSets.filter(function (gearSet) {
         for (var type in gearSet) {
-          if (gearSet[type]) {
-            return gearSet[type].main === gearPower ||
-                   gearSet[type].sub === gearPower;
+          if (gearSet[type] && (
+                gearSet[type].main === gearPower ||
+                gearSet[type].sub === gearPower
+              )) {
+            return true;
           }
         }
         return false;
