@@ -454,19 +454,20 @@ var App = React.createClass({
 
   deleteVerboseGearSets: function (gearSets) {
     var genericGearSets = gearSets.filter(function (gearSet) {
-      return gearSet.headgear === undefined ||
-             gearSet.clothing === undefined ||
-             gearSet.shoes === undefined;
+      return gearSet.headgear === anyGear ||
+             gearSet.clothing === anyGear ||
+             gearSet.shoes === anyGear;
     });
     if (genericGearSets.length === 0)
       return gearSets;
 
+    // TODO: Delete less generic gear sets if more generic gear set exists.
     return gearSets.filter(function (gearSet) {
       return !genericGearSets.some(function (g) {
         return gearSet !== g &&
-               gearSet.headgear === (g.headgear || gearSet.headgear) &&
-               gearSet.clothing === (g.clothing || gearSet.clothing) &&
-               gearSet.shoes === (g.shoes || gearSet.shoes);
+               (g.headgear === anyGear || g.headgear === gearSet.headgear) &&
+               (g.clothing === anyGear || g.clothing === gearSet.clothing) &&
+               (g.shoes === anyGear || g.shoes === gearSet.shoes);
       });
     });
   },
