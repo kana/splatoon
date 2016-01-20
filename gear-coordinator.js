@@ -414,21 +414,30 @@ var App = React.createClass({
     for (var i = 1; i < gearPowers.length; i++) {
       var gearPower = gearPowers[i];
 
-      var filteredGearSets = gearSets.filter(function (gearSet) {
+      var matchedGearSets = [];
+      var unmatchedGearSets = [];
+      for (var j = 0; j < gearSets.length; j++) {
+        var gearSet = gearSets[j];
+        var matched = false;
         for (var type in gearSet) {
           if (gearSet[type] && (
                 gearSet[type].main === gearPower ||
                 gearSet[type].sub === gearPower
               )) {
-            return true;
+            matched = true;
+            break;
           }
         }
-        return false;
-      });
+        if (matched) {
+          matchedGearSets.push(gearSet);
+        } else {
+          unmatchedGearSets.push(gearSet);
+        }
+      }
 
       gearSets = this.deleteVerboseGearSets(
-        filteredGearSets
-        .concat(this.extendGearSets(gearSets, gearPower))
+        matchedGearSets
+        .concat(this.extendGearSets(unmatchedGearSets, gearPower))
       );
     }
 
