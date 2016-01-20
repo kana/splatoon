@@ -392,113 +392,64 @@ var App = React.createClass({
   },
 
   findGearSetsFor: function (gearPowers) {
-    // TODO: Support specifying same gear power many times.
-    //   (it's necesary to memoize which slot is already matched.)
     if (gearPowers.length < 1)
       return [];
 
-    var gearSets =
-      theGears.filter(function (gear) {
-        return gear.main === gearPowers[0] || gear.sub === gearPowers[0];
-      })
-      .map(function (gear) {
-        if (gear.type === "アタマ") {
-          return {headgear: gear};
-        } else if (gear.type === "フク") {
-          return {clothing: gear};
-        } else {  // gear.type === "クツ"
-          return {shoes: gear};
-        }
-      });
-
-    for (var i = 1; i < gearPowers.length; i++) {
-      var gearPower = gearPowers[i];
-
-      var matchedGearSets = [];
-      var unmatchedGearSets = [];
-      for (var j = 0; j < gearSets.length; j++) {
-        var gearSet = gearSets[j];
-        var matched = false;
-        for (var type in gearSet) {
-          if (gearSet[type] && (
-                gearSet[type].main === gearPower ||
-                gearSet[type].sub === gearPower
-              )) {
-            matched = true;
-            break;
-          }
-        }
-        if (matched) {
-          matchedGearSets.push(gearSet);
-        } else {
-          unmatchedGearSets.push(gearSet);
-        }
-      }
-
-      gearSets = this.deleteVerboseGearSets(
-        matchedGearSets
-        .concat(this.extendGearSets(unmatchedGearSets, gearPower))
-      );
+    var requiredGearPowers = {};
+    for (var i = 0; i < gearPowers.length; i++) {
+      requiredGearPowers[gearPowers[i]] = true;
     }
+    var requiredKey =
+      gearPowers
+      .concat(['-', '-', '-', '-', '-', '-'])
+      .slice(0, 6)
+      .sort()
+      .join(':');
+    var candidateGears =
+      theGears.filter(function (gear) {
+        return requiredGearPowers[gear.main] || requiredGearPowers[gear.sub];
+      });
+    var candidateHeadgears =
+      candidateGears.filter(function (gear) {
+        return gear.type === 'アタマ';
+      }).concat([anyGear]);
+    var candidateClothings =
+      candidateGears.filter(function (gear) {
+        return gear.type === 'フク';
+      }).concat([anyGear]);
+    var candidateShoes =
+      candidateGears.filter(function (gear) {
+        return gear.type === 'クツ';
+      }).concat([anyGear]);
 
-    return this.sortGearSets(gearSets).map(function (gearSet) {
-      return {
-        headgear: gearSet.headgear || anyGear,
-        clothing: gearSet.clothing || anyGear,
-        shoes: gearSet.shoes || anyGear,
-      };
+    var gearSets = [];
+    candidateHeadgears.forEach(function (headgear) {
+      candidateClothings.forEach(function (clothing) {
+        candidateShoes.forEach(function (shoes) {
+          var key =
+            [
+              headgear.main,
+              headgear.sub,
+              clothing.main,
+              clothing.sub,
+              shoes.main,
+              shoes.sub
+            ].map(function (gearPower) {
+              return requiredGearPowers[gearPower] ? gearPower : '-';
+            })
+            .sort()
+            .join(':');
+          if (key === requiredKey){
+            gearSets.push({
+              headgear: headgear,
+              clothing: clothing,
+              shoes: shoes
+            });
+          }
+        });
+      });
     });
-  },
-
-  extendGearSets: function (gearSets, gearPower) {
-    // TODO: Simplify similar code blocks.
-    var extendedGetSetsList = gearSets.map(function (gearSet) {
-      var gearSetsList = [];
-      if (gearSet.headgear === undefined) {
-        gearSetsList.push(
-          theGears.filter(function (gear) {
-            return gear.type === "アタマ" &&
-                   (gear.main === gearPower || gear.sub === gearPower);
-          }).map(function (gear) {
-            return {
-              headgear: gear,
-              clothing: gearSet.clothing,
-              shoes: gearSet.shoes,
-            };
-          })
-        );
-      }
-      if (gearSet.clothing === undefined) {
-        gearSetsList.push(
-          theGears.filter(function (gear) {
-            return gear.type === "フク" &&
-                   (gear.main === gearPower || gear.sub === gearPower);
-          }).map(function (gear) {
-            return {
-              headgear: gearSet.headgear,
-              clothing: gear,
-              shoes: gearSet.shoes,
-            };
-          })
-        );
-      }
-      if (gearSet.shoes === undefined) {
-        gearSetsList.push(
-          theGears.filter(function (gear) {
-            return gear.type === "クツ" &&
-                   (gear.main === gearPower || gear.sub === gearPower);
-          }).map(function (gear) {
-            return {
-              headgear: gearSet.headgear,
-              clothing: gearSet.clothing,
-              shoes: gear,
-            };
-          })
-        );
-      }
-      return [].concat.apply([], gearSetsList);
-    });
-    return [].concat.apply([], extendedGetSetsList);
+    return this.sortGearSets(this.deleteVerboseGearSets(gearSets));
   },
 
   deleteVerboseGearSets: function (gearSets) {
