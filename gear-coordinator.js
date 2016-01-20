@@ -504,18 +504,18 @@ var App = React.createClass({
       return {
         index: i,
         value: [
-          gearSet.headgear === undefined ? 1 : 2,
-          gearSet.clothing === undefined ? 1 : 2,
-          gearSet.shoes === undefined ? 1 : 2,
-          orderFromGearPower[gearSet.headgear ? gearSet.headgear.main : '-'],
-          orderFromGearPower[gearSet.headgear ? gearSet.headgear.sub : '-'],
-          orderFromGearPower[gearSet.clothing ? gearSet.clothing.main : '-'],
-          orderFromGearPower[gearSet.clothing ? gearSet.clothing.sub : '-'],
-          orderFromGearPower[gearSet.shoes ? gearSet.shoes.main : '-'],
-          orderFromGearPower[gearSet.shoes ? gearSet.shoes.sub : '-'],
-          gearSet.headgear ? gearSet.headgear.name : '',
-          gearSet.clothing ? gearSet.clothing.name : '',
-          gearSet.shoes ? gearSet.shoes.name : '',
+          gearSet.headgear === anyGear ? 1 : 2,
+          gearSet.clothing === anyGear ? 1 : 2,
+          gearSet.shoes === anyGear ? 1 : 2,
+          orderFromGearPower[gearSet.headgear.main],
+          orderFromGearPower[gearSet.headgear.sub],
+          orderFromGearPower[gearSet.clothing.main],
+          orderFromGearPower[gearSet.clothing.sub],
+          orderFromGearPower[gearSet.shoes.main],
+          orderFromGearPower[gearSet.shoes.sub],
+          gearSet.headgear.name,
+          gearSet.clothing.name,
+          gearSet.shoes.namae
         ].join(':')
       };
     });
