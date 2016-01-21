@@ -17,6 +17,7 @@ task :deploy => [:compile] do
     sed -i 's/__VERSION__/#{version}/g' gear-coordinator.html &&
     git commit -am 'Build #{version}' &&
     git push github HEAD:gh-pages -f &&
-    git reset HEAD~
+    git reset HEAD~ &&
+    git checkout HEAD -- gear-coordinator.html
   }
 end
