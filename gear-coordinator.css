@@ -79,6 +79,13 @@ tr:hover > td.matched {
   background: #ffffcc;
 }
 
+.matched-1 {background: #ffeeee;}
+.matched-2 {background: #ffffdd;}
+.matched-3 {background: #eeffee;}
+.matched-4 {background: #eeffff;}
+.matched-5 {background: #eeeeff;}
+.matched-6 {background: #f5e5ff;}
+
 .showAllGearSets {
   display: block;
   text-align: center;
