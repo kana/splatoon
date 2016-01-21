@@ -338,18 +338,33 @@ var GearPowerSelector = React.createClass({
 
 var GearSetList = React.createClass({
   nodeFromGearSet: function (gearSet) {
-    // TODO: Highlight matched gear powers with distinct colors.
+    var remainingGearPowers = this.props.gearPowers.slice();
+    var currentGearPowers = [
+      gearSet.headgear.main,
+      gearSet.headgear.sub,
+      gearSet.clothing.main,
+      gearSet.clothing.sub,
+      gearSet.shoes.main,
+      gearSet.shoes.sub
+    ];
+    var matchings = [];
+    for (var i = 0; i < currentGearPowers.length; i++) {
+      var j = remainingGearPowers.indexOf(currentGearPowers[i]);
+      if (0 <= j)
+        remainingGearPowers[j] = null;
+      matchings.push(j + 1);
+    }
     return (
       <tr key={gearSet.headgear.name + ':' + gearSet.clothing.name + ':' + gearSet.shoes.name}>
         <td>{gearSet.headgear.name}</td>
-        <td>{gearSet.headgear.main}</td>
-        <td>{gearSet.headgear.sub}</td>
+        <td className={'matched-' + matchings[0]}>{gearSet.headgear.main}</td>
+        <td className={'matched-' + matchings[1]}>{gearSet.headgear.sub}</td>
         <td>{gearSet.clothing.name}</td>
-        <td>{gearSet.clothing.main}</td>
-        <td>{gearSet.clothing.sub}</td>
+        <td className={'matched-' + matchings[2]}>{gearSet.clothing.main}</td>
+        <td className={'matched-' + matchings[3]}>{gearSet.clothing.sub}</td>
         <td>{gearSet.shoes.name}</td>
-        <td>{gearSet.shoes.main}</td>
-        <td>{gearSet.shoes.sub}</td>
+        <td className={'matched-' + matchings[4]}>{gearSet.shoes.main}</td>
+        <td className={'matched-' + matchings[5]}>{gearSet.shoes.sub}</td>
       </tr>
     );
   },
