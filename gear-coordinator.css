@@ -78,3 +78,8 @@ tr:hover {
 tr:hover > td.matched {
   background: #ffffcc;
 }
+
+.showAllGearSets {
+  display: block;
+  text-align: center;
+}

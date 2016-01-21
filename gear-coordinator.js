@@ -355,6 +355,11 @@ var GearSetList = React.createClass({
   },
 
   render: function () {
+    var firstlyShownRowCount = 100;
+    var gearSets =
+      this.props.showAllGearSets ?
+      this.props.gearSets :
+      this.props.gearSets.slice(0, firstlyShownRowCount);
     return (
       <table className="gearSetList">
         <thead>
@@ -376,7 +381,21 @@ var GearSetList = React.createClass({
           </tr>
         </thead>
         <tbody>
-          {this.props.gearSets.map(this.nodeFromGearSet)}
+          {gearSets.map(this.nodeFromGearSet)}
+          {
+            // It is heavy to show too many rows at once.
+            1 <= gearSets.length &&
+            firstlyShownRowCount < this.props.gearSets.length &&
+            !this.props.showAllGearSets &&
+            <tr>
+              <td colSpan="9">
+                <label className="showAllGearSets">
+                  <input type="checkbox" onChange={this.props.onCheckedShowAllGearSets}/>
+                  全てのギアの組み合わせを表示する
+                </label>
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     );
@@ -533,6 +552,13 @@ var App = React.createClass({
     this.setState({
       gearPowers: newGearPowers,
       gearSets: this.findGearSetsFor(newGearPowers),
+      showAllGearSets: false
+    });
+  },
+
+  onCheckedShowAllGearSets: function () {
+    this.setState({
+      showAllGearSets: true
     });
   },
 
@@ -540,7 +566,12 @@ var App = React.createClass({
     return (
       <div className="app">
         <GearPowerSetSelector onChange={this.onChangeGearPowers} gearPowers={this.state.gearPowers}/>
-        <GearSetList gearSets={this.state.gearSets} gearPowers={this.state.gearPowers}/>
+        <GearSetList
+          gearSets={this.state.gearSets}
+          gearPowers={this.state.gearPowers}
+          showAllGearSets={this.state.showAllGearSets}
+          onCheckedShowAllGearSets={this.onCheckedShowAllGearSets}
+        />
       </div>
     );
   }
