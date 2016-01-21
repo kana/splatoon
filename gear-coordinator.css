@@ -75,6 +75,8 @@ td.matched {
 
 tr:hover {
   background: #fffff6;
+  font-weight: bolder;
+  font-size: 99%;
 }
 
 tr:hover > td.matched {
