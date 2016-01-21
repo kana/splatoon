@@ -303,7 +303,12 @@ var GearPowerSelector = React.createClass({
 
   render: function () {
     return (
-      <div className="gearPowerSelector">
+      <div className={
+        [
+          'gearPowerSelector',
+          'matched-' + (this.props.index + 1)
+        ].join(' ')
+      }>
         <select onChange={this.onChange} value={this.props.gearPower}>
           <option value="-">-</option>
           <option value="攻撃力アップ">攻撃力アップ</option>
