@@ -73,13 +73,13 @@ td.matched {
   background: #fffff6;
 }
 
-tr:hover {
+tbody > tr:hover {
   background: #fffff6;
   font-weight: bolder;
   font-size: 99%;
 }
 
-tr:hover > td.matched {
+tbody > tr:hover > td.matched {
   background: #ffffcc;
 }
 
