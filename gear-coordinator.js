@@ -323,6 +323,12 @@ var GearPowerSelector = React.createClass({
     this.props.onChange(e.target.value, this.props.index);
   },
 
+  nodeFromGearPower: function (gearPower) {
+    return (
+      <option key={gearPower} value={gearPower}>{gearPower}</option>
+    );
+  },
+
   render: function () {
     return (
       <div className={
@@ -332,31 +338,35 @@ var GearPowerSelector = React.createClass({
         ].join(' ')
       }>
         <select onChange={this.onChange} value={this.props.gearPower}>
-          <option value="-">-</option>
-          <option value="攻撃力アップ">攻撃力アップ</option>
-          <option value="防御力アップ">防御力アップ</option>
-          <option value="インク効率アップ(メイン)">インク効率アップ(メイン)</option>
-          <option value="インク効率アップ(サブ)">インク効率アップ(サブ)</option>
-          <option value="インク回復力アップ">インク回復力アップ</option>
-          <option value="ヒト移動速度アップ">ヒト移動速度アップ</option>
-          <option value="イカダッシュ速度アップ">イカダッシュ速度アップ</option>
-          <option value="スペシャル増加量アップ">スペシャル増加量アップ</option>
-          <option value="スペシャル時間延長">スペシャル時間延長</option>
-          <option value="復活時間短縮">復活時間短縮</option>
-          <option value="スペシャル減少量ダウン">スペシャル減少量ダウン</option>
-          <option value="スーパージャンプ時間短縮">スーパージャンプ時間短縮</option>
-          <option value="ボム飛距離アップ">ボム飛距離アップ</option>
-          <option value="ラストスパート">ラストスパート</option>
-          <option value="スタートダッシュ">スタートダッシュ</option>
-          <option value="逆境強化">逆境強化</option>
-          <option value="カムバック">カムバック</option>
-          <option value="マーキングガード">マーキングガード</option>
-          <option value="イカニンジャ">イカニンジャ</option>
-          <option value="うらみ">うらみ</option>
-          <option value="スタートレーダー">スタートレーダー</option>
-          <option value="ボムサーチ">ボムサーチ</option>
-          <option value="安全シューズ">安全シューズ</option>
-          <option value="ステルスジャンプ">ステルスジャンプ</option>
+          {
+            [
+              '-',
+              '攻撃力アップ',
+              '防御力アップ',
+              'インク効率アップ(メイン)',
+              'インク効率アップ(サブ)',
+              'インク回復力アップ',
+              'ヒト移動速度アップ',
+              'イカダッシュ速度アップ',
+              'スペシャル増加量アップ',
+              'スペシャル時間延長',
+              '復活時間短縮',
+              'スペシャル減少量ダウン',
+              'スーパージャンプ時間短縮',
+              'ボム飛距離アップ',
+              'ラストスパート',
+              'スタートダッシュ',
+              '逆境強化',
+              'カムバック',
+              'マーキングガード',
+              'イカニンジャ',
+              'うらみ',
+              'スタートレーダー',
+              'ボムサーチ',
+              '安全シューズ',
+              'ステルスジャンプ',
+            ].map(this.nodeFromGearPower)
+          }
         </select>
       </div>
     );
