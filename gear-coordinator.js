@@ -325,7 +325,11 @@ var GearPowerSelector = React.createClass({
 
   nodeFromGearPower: function (gearPower) {
     return (
-      <option key={gearPower} value={gearPower}>{gearPower}</option>
+      <option
+        key={gearPower}
+        value={gearPower}
+        disabled={this.props.restrictedGearPowers.indexOf(gearPower) !== -1}
+      >{gearPower}</option>
     );
   },
 
