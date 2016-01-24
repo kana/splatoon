@@ -276,8 +276,30 @@ var GearPowerSetSelector = React.createClass({
 
   nodeFromGearPower: function (gearPower, i) {
     return (
-      <GearPowerSelector key={i} index={i} onChange={this.onChange} gearPower={gearPower}/>
+      <GearPowerSelector
+        key={i}
+        index={i}
+        onChange={this.onChange}
+        gearPower={gearPower}
+        restrictedGearPowers={this.calculateRestrictedGearPowers()}
+      />
     );
+  },
+
+  calculateRestrictedGearPowers: function () {
+    var t = {};
+    for (var i = 0; i < this.props.gearPowers.length; i++) {
+      t[this.props.gearPowers[i]] = (t[this.props.gearPowers[i]] || 0) + 1;
+    }
+
+    var restrictedGearPowers = [];
+    for (var gearPower in t) {
+      if (3 <= t[gearPower]) {
+        restrictedGearPowers.push(gearPower);
+      }
+    }
+
+    return restrictedGearPowers;
   },
 
   render: function () {
