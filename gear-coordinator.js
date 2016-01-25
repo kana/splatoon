@@ -466,23 +466,46 @@ var App = React.createClass({
     };
   },
 
+  makeCountMap: function (xs) {
+    var countMap = {};
+    for (var i = 0; i < xs.length; i++) {
+      var x = xs[i];
+      countMap[x] = (countMap[x] || 0) + 1;
+    }
+    return countMap;
+  },
+
+  calculateRequiredGearPowerData: function (gearPowers) {
+    var countMap = this.makeCountMap(gearPowers);
+    var names = [];
+    for (var gearPower in countMap) {
+      names.push(gearPower);
+    }
+    return {
+      countMap: countMap,
+      names: names
+    };
+  },
+
+  calculateRequiredKey: function (required, gearPowers) {
+    var countMap = this.makeCountMap(gearPowers);
+    var bits = 0;
+    for (var i = 0; i < required.names.length; i++) {
+      bits |= ((1 << (countMap[required.names[i]] || 0)) - 1) << (3 * i);
+    }
+    return bits;
+  },
+
   findGearSetsFor: function (gearPowers) {
     if (gearPowers.length < 1)
       return [];
 
-    var requiredGearPowers = {};
-    for (var i = 0; i < gearPowers.length; i++) {
-      requiredGearPowers[gearPowers[i]] = true;
-    }
-    var requiredKey =
-      gearPowers
-      .concat(['-', '-', '-', '-', '-', '-'])
-      .slice(0, 6)
-      .sort()
-      .join(':');
+    var required = this.calculateRequiredGearPowerData(gearPowers);
+    var calculateRequiredKey = this.calculateRequiredKey;
+    var requiredKey = calculateRequiredKey(required, gearPowers);
     var candidateGears =
       theGears.filter(function (gear) {
-        return requiredGearPowers[gear.main] || requiredGearPowers[gear.sub];
+        return required.countMap[gear.main] || required.countMap[gear.sub];
       });
     var candidateHeadgears =
       candidateGears.filter(function (gear) {
@@ -501,20 +524,16 @@ var App = React.createClass({
     candidateHeadgears.forEach(function (headgear) {
       candidateClothings.forEach(function (clothing) {
         candidateShoes.forEach(function (shoes) {
-          var key =
-            [
-              headgear.main,
-              headgear.sub,
-              clothing.main,
-              clothing.sub,
-              shoes.main,
-              shoes.sub
-            ].map(function (gearPower) {
-              return requiredGearPowers[gearPower] ? gearPower : '-';
-            })
-            .sort()
-            .join(':');
-          if (key === requiredKey){
+          var gearPowers = [
+            headgear.main,
+            headgear.sub,
+            clothing.main,
+            clothing.sub,
+            shoes.main,
+            shoes.sub
+          ];
+          var key = calculateRequiredKey(required, gearPowers);
+          if ((key & requiredKey) === requiredKey){
             gearSets.push({
               headgear: headgear,
               clothing: clothing,
