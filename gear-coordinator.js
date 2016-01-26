@@ -603,12 +603,12 @@ var App = React.createClass({
           gearSet.shoes === anyGear ? 2 : 1,
           orderFromGearPower[gearSet.headgear.main],
           orderFromGearPower[gearSet.headgear.sub],
+          gearSet.headgear.name,
           orderFromGearPower[gearSet.clothing.main],
           orderFromGearPower[gearSet.clothing.sub],
+          gearSet.clothing.name,
           orderFromGearPower[gearSet.shoes.main],
           orderFromGearPower[gearSet.shoes.sub],
-          gearSet.headgear.name,
-          gearSet.clothing.name,
           gearSet.shoes.namae
         ].join(':')
       };
