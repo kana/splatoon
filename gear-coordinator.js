@@ -598,9 +598,9 @@ var App = React.createClass({
       return {
         index: i,
         value: [
-          gearSet.headgear === anyGear ? 1 : 2,
-          gearSet.clothing === anyGear ? 1 : 2,
-          gearSet.shoes === anyGear ? 1 : 2,
+          gearSet.headgear === anyGear ? 2 : 1,
+          gearSet.clothing === anyGear ? 2 : 1,
+          gearSet.shoes === anyGear ? 2 : 1,
           orderFromGearPower[gearSet.headgear.main],
           orderFromGearPower[gearSet.headgear.sub],
           orderFromGearPower[gearSet.clothing.main],
