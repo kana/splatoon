@@ -460,9 +460,10 @@ var GearSetList = React.createClass({
 
 var App = React.createClass({
   getInitialState: function () {
+    var gearPowers = this.gearPowersFromId(location.hash.substring(1));
     return {
-      gearPowers: [],
-      gearSets: [],
+      gearPowers: gearPowers,
+      gearSets: this.findGearSetsFor(gearPowers),
     };
   },
 
@@ -623,12 +624,68 @@ var App = React.createClass({
     return sortedGearSets;
   },
 
+  gearPowerList: [
+    '攻撃力アップ',
+    '防御力アップ',
+    'インク効率アップ(メイン)',
+    'インク効率アップ(サブ)',
+    'インク回復力アップ',
+    'ヒト移動速度アップ',
+    'イカダッシュ速度アップ',
+    'スペシャル増加量アップ',
+    'スペシャル時間延長',
+    '復活時間短縮',
+    'スペシャル減少量ダウン',
+    'スーパージャンプ時間短縮',
+    'ボム飛距離アップ',
+    'ラストスパート',
+    'スタートダッシュ',
+    '逆境強化',
+    'カムバック',
+    'マーキングガード',
+    'イカニンジャ',
+    'うらみ',
+    'スタートレーダー',
+    'ボムサーチ',
+    '安全シューズ',
+    'ステルスジャンプ',
+  ],
+
+  idFromGearPowers: function (gearPowers) {
+    var gpl = this.gearPowerList;
+    var a = 'a'.charCodeAt(0);
+    return (
+      gearPowers
+      .map(function (gearPower) {
+        return String.fromCharCode(a + gpl.indexOf(gearPower));
+      })
+      .join('')
+    );
+  },
+
+  gearPowersFromId: function (id) {
+    var gearPowers = [];
+    var a = 'a'.charCodeAt(0);
+    for (var i = 0; i < id.length; i++) {
+      var j = id.charCodeAt(i) - a;
+      if (0 <= j && j < this.gearPowerList.length)
+        gearPowers.push(this.gearPowerList[j]);
+    }
+    return gearPowers;
+  },
+
   onChangeGearPowers: function (newGearPowers) {
     this.setState({
       gearPowers: newGearPowers,
       gearSets: this.findGearSetsFor(newGearPowers),
       showAllGearSets: false
     });
+    var id = this.idFromGearPowers(newGearPowers);
+    history.replaceState(
+      null,
+      'Splatoon Gear Coordinator',
+      id === null ? location.pathname : '#' + id
+    );
   },
 
   onCheckedShowAllGearSets: function () {
