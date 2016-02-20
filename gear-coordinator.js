@@ -604,6 +604,7 @@ var App = React.createClass({
       '-': '99'
     };
     var mapped = gearSets.map(function (gearSet, i) {
+      var countMap = JSON.parse(JSON.stringify(required.countMap));
       return {
         index: i,
         value: [
@@ -611,20 +612,20 @@ var App = React.createClass({
           gearSet.clothing === anyGear ? 1 : 2,
           gearSet.headgear === anyGear ? 1 : 2,
 
-          required.countMap[gearSet.headgear.main] ? 1 : 2,
-          required.countMap[gearSet.headgear.sub] ? 1 : 2,
+          countMap[gearSet.headgear.main]-- > 0 ? 1 : 2,
+          countMap[gearSet.headgear.sub]-- > 0 ? 1 : 2,
           orderFromGearPower[gearSet.headgear.main],
           orderFromGearPower[gearSet.headgear.sub],
           gearSet.headgear.name,
 
-          required.countMap[gearSet.clothing.main] ? 1 : 2,
-          required.countMap[gearSet.clothing.sub] ? 1 : 2,
+          countMap[gearSet.clothing.main]-- > 0 ? 1 : 2,
+          countMap[gearSet.clothing.sub]-- > 0 ? 1 : 2,
           orderFromGearPower[gearSet.clothing.main],
           orderFromGearPower[gearSet.clothing.sub],
           gearSet.clothing.name,
 
-          required.countMap[gearSet.shoes.main] ? 1 : 2,
-          required.countMap[gearSet.shoes.sub] ? 1 : 2,
+          countMap[gearSet.shoes.main]-- > 0 ? 1 : 2,
+          countMap[gearSet.shoes.sub]-- > 0 ? 1 : 2,
           orderFromGearPower[gearSet.shoes.main],
           orderFromGearPower[gearSet.shoes.sub],
           gearSet.shoes.name
