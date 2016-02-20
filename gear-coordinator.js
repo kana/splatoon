@@ -618,7 +618,7 @@ var App = React.createClass({
           gearSet.clothing.name,
           orderFromGearPower[gearSet.shoes.main],
           orderFromGearPower[gearSet.shoes.sub],
-          gearSet.shoes.namae
+          gearSet.shoes.name
         ].join(':')
       };
     });
