@@ -552,7 +552,7 @@ var App = React.createClass({
         });
       });
     });
-    return this.sortGearSets(this.deleteVerboseGearSets(gearSets));
+    return this.sortGearSets(this.deleteVerboseGearSets(gearSets), required);
   },
 
   deleteVerboseGearSets: function (gearSets) {
@@ -575,7 +575,7 @@ var App = React.createClass({
     });
   },
 
-  sortGearSets: function (gearSets) {
+  sortGearSets: function (gearSets, required) {
     var orderFromGearPower = {
       '攻撃力アップ': '01',
       '防御力アップ': '02',
@@ -610,12 +610,21 @@ var App = React.createClass({
           gearSet.shoes === anyGear ? 1 : 2,
           gearSet.clothing === anyGear ? 1 : 2,
           gearSet.headgear === anyGear ? 1 : 2,
+
+          required.countMap[gearSet.headgear.main] ? 1 : 2,
+          required.countMap[gearSet.headgear.sub] ? 1 : 2,
           orderFromGearPower[gearSet.headgear.main],
           orderFromGearPower[gearSet.headgear.sub],
           gearSet.headgear.name,
+
+          required.countMap[gearSet.clothing.main] ? 1 : 2,
+          required.countMap[gearSet.clothing.sub] ? 1 : 2,
           orderFromGearPower[gearSet.clothing.main],
           orderFromGearPower[gearSet.clothing.sub],
           gearSet.clothing.name,
+
+          required.countMap[gearSet.shoes.main] ? 1 : 2,
+          required.countMap[gearSet.shoes.sub] ? 1 : 2,
           orderFromGearPower[gearSet.shoes.main],
           orderFromGearPower[gearSet.shoes.sub],
           gearSet.shoes.name
