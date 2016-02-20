@@ -376,7 +376,10 @@ var GearPowerSelector = React.createClass({
             ].map(this.nodeFromGearPower)
           }
         </select>
-        <button className="deselect" onClick={this.deselect}>×</button>
+        {
+          this.props.gearPower !== '-' &&
+          <button className="deselect" onClick={this.deselect}>×</button>
+        }
      </div>
    );
   }
