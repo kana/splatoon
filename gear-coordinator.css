@@ -33,6 +33,7 @@ h1 {
 
 .gearPowerSetSelector > .forms {
   float: right;
+  text-align: left;
 }
 
 .gearPowerSelector {
