@@ -290,17 +290,55 @@ var GearSelector = React.createClass({
   }
 });
 
-var App = React.createClass({
+var SlotMachine = React.createClass({
   getInitialState: function () {
     return {
       count: 0,
+      slot1: '-',
+      slot2: '-',
+      slot3: '-'
+    };
+  },
+
+  challenge: function (gear) {
+    return '-';  // TODO: Implement.
+  },
+
+  onClick: function () {
+    this.setState({
+      count: this.state.count + 1,
+      slot1: this.challenge(this.props.gear),
+      slot2: this.challenge(this.props.gear),
+      slot3: this.challenge(this.props.gear)
+    });
+  },
+
+  render: function () {
+    return (
+      <div className="slotMachine">
+        <div className="state">
+          {this.state.count}回目
+        </div>
+        <div className="gearPowers">
+          <div className="gear slot1">{this.state.slot1}</div>
+          <div className="gear slot2">{this.state.slot2}</div>
+          <div className="gear slot3">{this.state.slot3}</div>
+        </div>
+        <button onClick={this.onClick}>回す</button>
+      </div>
+    );
+  }
+});
+
+var App = React.createClass({
+  getInitialState: function () {
+    return {
       gear: theGears[0]
     };
   },
 
   onChange: function (gear) {
     this.setState({
-      count: 0,
       gear: gear
     });
   },
@@ -309,6 +347,7 @@ var App = React.createClass({
     return (
       <div className="app">
         <GearSelector onChange={this.onChange} gear={this.state.gear}/>
+        <SlotMachine gear={this.state.gear}/>
       </div>
     );
   }
