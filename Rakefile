@@ -1,9 +1,14 @@
 task :default => [:compile]
 
-task :compile => ['gears.bundled.js', 'gear-coordinator.bundled.js']
+task :compile => [
+  'gears.bundled.js',
+  'gear-coordinator.bundled.js',
+  'uni.bundled.js',
+]
 
 file 'gears.bundled.js' => ['gears.js'] { |t| bundle(t) }
 file 'gear-coordinator.bundled.js' => ['gear-coordinator.js'] { |t| bundle(t) }
+file 'uni.bundled.js' => ['uni.js'] { |t| bundle(t) }
 
 def bundle(t)
   sh "browserify -g uglifyify -t [ babelify --presets [ react ] ] #{t.prerequisites.join(' ')} -o #{t.name}"
