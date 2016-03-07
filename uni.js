@@ -301,7 +301,26 @@ var SlotMachine = React.createClass({
   },
 
   challenge: function (gear) {
-    return '-';  // TODO: Implement.
+    var gearPowers = [
+      '攻撃力アップ',
+      '防御力アップ',
+      'インク効率アップ(メイン)',
+      'インク効率アップ(サブ)',
+      'インク回復力アップ',
+      'ヒト移動速度アップ',
+      'イカダッシュ速度アップ',
+      'スペシャル増加量アップ',
+      'スペシャル時間延長',
+      '復活時間短縮',
+      'スペシャル減少量ダウン',
+      'スーパージャンプ時間短縮',
+      'ボム飛距離アップ'
+    ];
+
+    // TODO: Use gear.sub and gear.subrate.
+    var i = Math.floor(Math.random() * gearPowers.length)
+
+    return gearPowers[i];
   },
 
   onClick: function () {
