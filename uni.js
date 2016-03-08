@@ -344,13 +344,15 @@ var SlotMachine = React.createClass({
   render: function () {
     return (
       <div className="slotMachine">
-        <div className="state">
-          {this.state.count}回目
-        </div>
-        <div className="gearPowers">
-          <div className="gear slot1">{this.state.slot1}</div>
-          <div className="gear slot2">{this.state.slot2}</div>
-          <div className="gear slot3">{this.state.slot3}</div>
+        <div className="result">
+          <div className="state">
+            {this.state.count}回目
+          </div>
+          <div className="gearPowers">
+            <div className="gear slot1">{this.state.slot1}</div>
+            <div className="gear slot2">{this.state.slot2}</div>
+            <div className="gear slot3">{this.state.slot3}</div>
+          </div>
         </div>
         <button onClick={this.onClick}>回す</button>
       </div>
