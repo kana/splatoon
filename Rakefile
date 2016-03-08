@@ -6,12 +6,12 @@ task :compile => [
   'uni.bundled.js',
 ]
 
-file 'gears.bundled.js' => ['gears.js'] { |t| bundle(t) }
-file 'gear-coordinator.bundled.js' => ['gear-coordinator.js'] { |t| bundle(t) }
-file 'uni.bundled.js' => ['uni.js'] { |t| bundle(t) }
+file 'gears.bundled.js' => ['gears.js', 'gear-db.js'] { |t| bundle(t) }
+file 'gear-coordinator.bundled.js' => ['gear-coordinator.js', 'gear-db.js'] { |t| bundle(t) }
+file 'uni.bundled.js' => ['uni.js', 'gear-db.js'] { |t| bundle(t) }
 
 def bundle(t)
-  sh "browserify -g uglifyify -t [ babelify --presets [ react ] ] #{t.prerequisites.join(' ')} -o #{t.name}"
+  sh "browserify -g uglifyify -t [ babelify --presets [ react ] ] #{t.prerequisites.first()} -o #{t.name}"
 end
 
 task :deploy => [:compile] do
