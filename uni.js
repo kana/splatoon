@@ -317,10 +317,19 @@ var SlotMachine = React.createClass({
       'ボム飛距離アップ'
     ];
 
-    // TODO: Use gear.sub and gear.subrate.
-    var i = Math.floor(Math.random() * gearPowers.length)
+    var candidates = [];
+    for (var i = 0; i < gearPowers.length; i++) {
+      var j = gearPowers[i] === gear.sub ? 10 :
+              gearPowers[i] === gear.subrare ? 1 :
+              2;
+      while (j--) {
+        candidates.push(gearPowers[i]);
+      }
+    }
 
-    return gearPowers[i];
+    var i = Math.floor(Math.random() * candidates.length)
+
+    return candidates[i];
   },
 
   onClick: function () {
