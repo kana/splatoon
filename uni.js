@@ -32,13 +32,21 @@ var GearSelector = React.createClass({
 });
 
 var SlotMachine = React.createClass({
-  getInitialState: function () {
+  makeInitialState: function () {
     return {
       count: 0,
       slot1: '-',
       slot2: '-',
       slot3: '-'
     };
+  },
+
+  getInitialState: function () {
+    return this.makeInitialState();
+  },
+
+  componentWillReceiveProps: function () {
+    this.setState(this.makeInitialState());
   },
 
   challenge: function (gear) {
