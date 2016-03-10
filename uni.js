@@ -2,9 +2,25 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var GearDB = require('./gear-db');
 
+var theGears = (function () {
+  var gears = GearDB.theGears.slice();
+  var mapped = gears.map(function (gear, i) {
+    return {
+      index: i,
+      value: gear.name
+    };
+  });
+  mapped.sort(function (a, b) {
+    return a.value.localeCompare(b.value);
+  });
+  return mapped.map(function (x) {
+    return gears[x.index];
+  });
+})();
+
 var GearSelector = React.createClass({
   onChange: function (e) {
-    this.props.onChange(GearDB.theGears.find(function (gear) {
+    this.props.onChange(theGears.find(function (gear) {
       return gear.name === e.target.value;
     }));
   },
@@ -23,7 +39,7 @@ var GearSelector = React.createClass({
         </div>
         <div className="forms">
           <select onChange={this.onChange} value={this.props.gear.name}>
-            {GearDB.theGears.map(this.nodeFromGear)}
+            {theGears.map(this.nodeFromGear)}
           </select>
         </div>
       </div>
@@ -118,7 +134,7 @@ var SlotMachine = React.createClass({
 var App = React.createClass({
   getInitialState: function () {
     return {
-      gear: GearDB.theGears[0]
+      gear: theGears[0]
     };
   },
 
