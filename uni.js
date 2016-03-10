@@ -97,7 +97,7 @@ var SlotMachine = React.createClass({
     return candidates[i];
   },
 
-  onClick: function () {
+  challengeOnce: function () {
     this.setState({
       count: this.state.count + 1,
       slot1: this.challenge(this.props.gear),
@@ -125,7 +125,7 @@ var SlotMachine = React.createClass({
             <div className="gear slot3">{this.state.slot3}</div>
           </div>
         </div>
-        <button onClick={this.onClick}>回す</button>
+        <button onClick={this.challengeOnce}>回す</button>
       </div>
     );
   }
