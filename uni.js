@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var ReactTimerMixin = require('react-timer-mixin');
 var GearDB = require('./gear-db');
 
 var theGears = (function () {
@@ -48,6 +49,8 @@ var GearSelector = React.createClass({
 });
 
 var SlotMachine = React.createClass({
+  mixins: [ReactTimerMixin],
+
   makeInitialState: function () {
     return {
       count: 0,
@@ -98,12 +101,27 @@ var SlotMachine = React.createClass({
   },
 
   challengeOnce: function () {
-    this.setState({
+    var newState = {
       count: this.state.count + 1,
       slot1: this.challenge(this.props.gear),
       slot2: this.challenge(this.props.gear),
       slot3: this.challenge(this.props.gear)
-    });
+    };
+    this.setState(newState);
+    return newState;
+  },
+
+  challengeForPerfectGearPowers: function () {
+    var newState = this.challengeOnce();
+    if (newState.slot1 !== newState.slot2 ||
+        newState.slot2 !== newState.slot3) {
+      this.setTimeout(
+        function () {
+          this.challengeForPerfectGearPowers();
+        },
+        10
+      );
+    }
   },
 
   render: function () {
@@ -126,6 +144,7 @@ var SlotMachine = React.createClass({
           </div>
         </div>
         <button onClick={this.challengeOnce}>回す</button>
+        <button onClick={this.challengeForPerfectGearPowers}>何か揃うまで回す</button>
       </div>
     );
   }
