@@ -83,8 +83,13 @@ var SlotMachine = React.createClass({
   },
 
   render: function () {
+    var classNames = ['slotMachine'];
+    if (this.state.slot1 === this.state.slot2 &&
+        this.state.slot2 === this.state.slot3) {
+      classNames.push('perfect');
+    }
     return (
-      <div className="slotMachine">
+      <div className={classNames.join(' ')}>
         <div className="result">
           <div className="state">
             {this.state.count}回目

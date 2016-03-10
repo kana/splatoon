@@ -33,3 +33,8 @@ h1 {
   text-align: left;
   width: 12em;
 }
+
+.slotMachine.perfect .gear {
+  color: tomato;
+  font-weight: bolder;
+}
