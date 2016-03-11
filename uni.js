@@ -138,6 +138,20 @@ var SlotMachine = React.createClass({
     }
   },
 
+  challengeForExtremeGearPowers: function () {
+    var newState = this.challengeOnce();
+    if (newState.slot1 !== newState.slot2 ||
+        newState.slot2 !== newState.slot3 ||
+        newState.slot3 !== this.props.gear.main) {
+      this.setTimeout(
+        function () {
+          this.challengeForExtremeGearPowers();
+        },
+        10
+      );
+    }
+  },
+
   render: function () {
     var classNames = ['slotMachine'];
     if (this.state.count !== 0 &&
@@ -160,6 +174,7 @@ var SlotMachine = React.createClass({
         <button onClick={this.challengeOnce}>回す</button>
         <button onClick={this.challengeForPerfectGearPowers}>何か揃うまで回す</button>
         <button onClick={this.challengeForRareGearPowers}>凄いのが揃うまで回す</button>
+        <button onClick={this.challengeForExtremeGearPowers}>極まったのが揃うまで回す</button>
       </div>
     );
   }
