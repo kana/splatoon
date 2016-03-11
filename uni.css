@@ -39,3 +39,8 @@ h1 {
   color: tomato;
   font-weight: bolder;
 }
+
+.slotMachine button {
+  display: block;
+  margin: 1ex auto;
+}
