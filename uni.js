@@ -68,23 +68,24 @@ var SlotMachine = React.createClass({
     this.setState(this.makeInitialState());
   },
 
-  challenge: function (gear) {
-    var gearPowers = [
-      '攻撃力アップ',
-      '防御力アップ',
-      'インク効率アップ(メイン)',
-      'インク効率アップ(サブ)',
-      'インク回復力アップ',
-      'ヒト移動速度アップ',
-      'イカダッシュ速度アップ',
-      'スペシャル増加量アップ',
-      'スペシャル時間延長',
-      '復活時間短縮',
-      'スペシャル減少量ダウン',
-      'スーパージャンプ時間短縮',
-      'ボム飛距離アップ'
-    ];
+  availableGearPowers: [
+    '攻撃力アップ',
+    '防御力アップ',
+    'インク効率アップ(メイン)',
+    'インク効率アップ(サブ)',
+    'インク回復力アップ',
+    'ヒト移動速度アップ',
+    'イカダッシュ速度アップ',
+    'スペシャル増加量アップ',
+    'スペシャル時間延長',
+    '復活時間短縮',
+    'スペシャル減少量ダウン',
+    'スーパージャンプ時間短縮',
+    'ボム飛距離アップ'
+  ],
 
+  challenge: function (gear) {
+    var gearPowers = this.availableGearPowers;
     var candidates = [];
     for (var i = 0; i < gearPowers.length; i++) {
       var j = gearPowers[i] === gear.sub ? 10 :
@@ -159,6 +160,8 @@ var SlotMachine = React.createClass({
         this.state.slot2 === this.state.slot3) {
       classNames.push('perfect');
     }
+    var canBeExtreme =
+      this.availableGearPowers.indexOf(this.props.gear.main) !== -1;
     return (
       <div className={classNames.join(' ')}>
         <div className="result">
@@ -174,7 +177,8 @@ var SlotMachine = React.createClass({
         <button onClick={this.challengeOnce}>回す</button>
         <button onClick={this.challengeForPerfectGearPowers}>何か揃うまで回す</button>
         <button onClick={this.challengeForRareGearPowers}>凄いのが揃うまで回す</button>
-        <button onClick={this.challengeForExtremeGearPowers}>極まったのが揃うまで回す</button>
+        <button onClick={this.challengeForExtremeGearPowers}
+          disabled={!canBeExtreme}>極まったのが揃うまで回す</button>
       </div>
     );
   }
