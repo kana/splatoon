@@ -6,6 +6,7 @@ var WeaponTable = React.createClass({
     var specialWeapons = [
       'メガホンレーザー',
       'トルネード',
+      'ボムラッシュ',
       'バリア',
       'ダイオウイカ',
       'スーパーセンサー',
@@ -20,6 +21,7 @@ var WeaponTable = React.createClass({
       'ポイズンボール',
       'トラップ',
       'ジャンプビーコン',
+      'スプリンクラー',
       'スプラッシュシールド'
     ];
     return (
