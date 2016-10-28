@@ -1,0 +1,47 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+th, td {
+  border: 1px solid #ccc;
+}
+
+th {
+  padding: 0 0.5ex;
+  background: #eee;
+}
+
+td {
+  padding: 0.5ex 0.5ex;
+  font-size: 80%;
+}
+
+.weapon {
+  display: block;
+  padding: 0 0.5ex;
+}
+
+.weapon + .weapon {
+  margin-top: 0.5ex;
+}
+
+.weapon.shooter   { background: #f6f6f6; }
+.weapon.blaster   { background: #fed; }
+.weapon.charger   { background: #eef; }
+.weapon.roller    { background: #efc; }
+.weapon.brush     { background: #ffc; }
+.weapon.slosher   { background: #edf; }
+.weapon.splatling { background: #fde; }
+
+tr:nth-child(even) {
+  background: #fcfcfc;
+}
