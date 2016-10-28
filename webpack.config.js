@@ -1,8 +1,12 @@
 module.exports = {
-  entry: './gears.js',
+  entry: {
+    'gears': './gears.js',
+    'gear-coordinator': './gear-coordinator.js',
+    'uni': './uni.js'
+  },
   output: {
     path: '.',
-    filename: 'gears.bundled.js'
+    filename: '[name].bundled.js'
   },
   module: {
     loaders: [
