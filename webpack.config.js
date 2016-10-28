@@ -1,7 +1,7 @@
 module.exports = {
   entry: './gears.js',
   output: {
-    path: './bin',
+    path: '.',
     filename: 'gears.bundled.js'
   },
   module: {
