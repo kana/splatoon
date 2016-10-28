@@ -37,7 +37,7 @@ var WeaponTable = React.createClass({
             <tr key={sub}>
               <th>{sub}</th>
               {
-                specialWeapons.map(sp => <th key={sub + sp}>{sub} / {sp}</th>)
+                specialWeapons.map(sp => <td key={sub + sp}>{sub} / {sp}</td>)
               }
             </tr>
           )}
