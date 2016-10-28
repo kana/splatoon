@@ -1,45 +1,47 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var SpecialWeapons = [
+  'メガホンレーザー',
+  'トルネード',
+  'ボムラッシュ',
+  'バリア',
+  'ダイオウイカ',
+  'スーパーセンサー',
+  'スーパーショット'
+];
+
+var SubWeapons = [
+  'スプラッシュボム',
+  'キューバンボム',
+  'クイックボム',
+  'チェイスボム',
+  'ポイントセンサー',
+  'ポイズンボール',
+  'トラップ',
+  'ジャンプビーコン',
+  'スプリンクラー',
+  'スプラッシュシールド'
+];
+
 var WeaponTable = React.createClass({
   render: function () {
-    var specialWeapons = [
-      'メガホンレーザー',
-      'トルネード',
-      'ボムラッシュ',
-      'バリア',
-      'ダイオウイカ',
-      'スーパーセンサー',
-      'スーパーショット'
-    ];
-    var subWeapons = [
-      'スプラッシュボム',
-      'キューバンボム',
-      'クイックボム',
-      'チェイスボム',
-      'ポイントセンサー',
-      'ポイズンボール',
-      'トラップ',
-      'ジャンプビーコン',
-      'スプリンクラー',
-      'スプラッシュシールド'
-    ];
     return (
       <table className="weaponTable">
         <thead>
           <tr>
             <th></th>
             {
-              specialWeapons.map(sp => <th key={sp}>{sp}</th>)
+              SpecialWeapons.map(sp => <th key={sp}>{sp}</th>)
             }
           </tr>
         </thead>
         <tbody>
-          {subWeapons.map(sub =>
+          {SubWeapons.map(sub =>
             <tr key={sub}>
               <th>{sub}</th>
               {
-                specialWeapons.map(sp => <td key={sub + sp}>{sub} / {sp}</td>)
+                SpecialWeapons.map(sp => <td key={sub + sp}>{sub} / {sp}</td>)
               }
             </tr>
           )}
