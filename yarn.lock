@@ -1045,7 +1045,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
-jstransform@^11.0.3:
+jstransform@^11.0.3, jstransform@11:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/jstransform/-/jstransform-11.0.3.tgz#09a78993e0ae4d4ef4487f6155a91f6190cb4223"
   dependencies:
@@ -1054,6 +1054,13 @@ jstransform@^11.0.3:
     esprima-fb "^15001.1.0-dev-harmony-fb"
     object-assign "^2.0.0"
     source-map "^0.4.2"
+
+jsx-loader:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/jsx-loader/-/jsx-loader-0.13.2.tgz#9767f643975c78f5e5abeba9bc57885297e732d4"
+  dependencies:
+    jstransform "11"
+    loader-utils "^0.2.2"
 
 kind-of@^3.0.2:
   version "3.0.4"
@@ -1065,7 +1072,7 @@ lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
 
-loader-utils@^0.2.11:
+loader-utils@^0.2.11, loader-utils@^0.2.2:
   version "0.2.16"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-0.2.16.tgz#f08632066ed8282835dff88dfb52704765adee6d"
   dependencies:
