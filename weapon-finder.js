@@ -118,6 +118,10 @@ var WeaponSets = [
 ];
 
 var WeaponTable = React.createClass({
+  has: function (set, sub, sp) {
+    return set.sub === sub && set.special === sp;
+  },
+
   render: function () {
     return (
       <table className="weaponTable">
@@ -134,7 +138,19 @@ var WeaponTable = React.createClass({
             <tr key={sub}>
               <th>{sub}</th>
               {
-                SpecialWeapons.map(sp => <td key={sub + sp}>{sub} / {sp}</td>)
+                SpecialWeapons.map(sp =>
+                  <td key={sub + sp}>
+                    {
+                      WeaponSets
+                      .filter(set => this.has(set, sub, sp))
+                      .map(set =>
+                        <span key={set.main} className="weapon">
+                          {set.main}
+                        </span>
+                      )
+                    }
+                  </td>
+                )
               }
             </tr>
           )}
