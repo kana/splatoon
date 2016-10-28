@@ -1,17 +1,7 @@
 task :default => [:compile]
 
-task :compile => [
-  'gears.bundled.js',
-  'gear-coordinator.bundled.js',
-  'uni.bundled.js',
-]
-
-file 'gears.bundled.js' => ['gears.js', 'gear-db.js'] { |t| bundle(t) }
-file 'gear-coordinator.bundled.js' => ['gear-coordinator.js', 'gear-db.js'] { |t| bundle(t) }
-file 'uni.bundled.js' => ['uni.js', 'gear-db.js'] { |t| bundle(t) }
-
-def bundle(t)
-  sh "browserify -g uglifyify -t [ babelify --presets [ react ] ] #{t.prerequisites.first()} -o #{t.name}"
+task :compile do
+  sh 'webpack -p'
 end
 
 task :deploy => [:compile] do
