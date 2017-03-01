@@ -45,3 +45,13 @@ td {
 tr:nth-child(even) {
   background: #fcfcfc;
 }
+
+.penalty {
+  font-size: 80%;
+  opacity: 0.5;
+  margin-left: 0.25em;
+}
+
+.penalty[data-amount="小"] { color: #00f; }
+.penalty[data-amount="中"] { color: #f90; }
+.penalty[data-amount="大"] { color: #f00; }
