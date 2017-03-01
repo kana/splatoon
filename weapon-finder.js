@@ -143,15 +143,15 @@ var WeaponTable = React.createClass({
                   <td key={sub + sp}>
                     {
                       WeaponSets
-                      .filter(set => this.has(set, sub, sp))
                       .filter(set =>
-                        this.props.weaponType === 'all' ||
-                        this.props.weaponType === set.type)
+                        this.has(set, sub, sp) &&
+                        this.props[set.type]
+                      )
                       .map(set =>
                         <span key={set.main} className={'weapon ' + set.type}>
                           {set.main}
                           {
-                            this.props.showPenalty &&
+                            this.props.penalty &&
                             <span className="penalty" data-amount={set.penalty}>
                               {set.penalty}
                             </span>
@@ -171,31 +171,34 @@ var WeaponTable = React.createClass({
 });
 
 var ControlPanel = React.createClass({
+  onChange: function (e) {
+    this.props.onChange(e.target.name, e.target.checked);
+  },
+
   render: function () {
+    var preferences = [
+      {name: 'shooter', label: 'シューター'},
+      {name: 'blaster', label: 'ブラスター'},
+      {name: 'roller', label: 'ローラー'},
+      {name: 'brush', label: 'フデ'},
+      {name: 'charger', label: 'チャージャー'},
+      {name: 'splatling', label: 'スピナー'},
+      {name: 'slosher', label: 'スロッシャー'},
+      {name: 'penalty', label: 'スペシャル減少量'}
+    ];
+
     return (
       <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.props.showPenalty}
-            onChange={this.props.onChangeShowPenalty}/>
-          <span>スペシャル減少量を表示</span>
-        </label>
-        <label>
-          <span>メインウェポンの種類</span>
-          <select
-            value={this.props.weaponType}
-            onChange={this.props.onChangeWeaponType}>
-            <option value="all">全て</option>
-            <option value="shooter">シューター</option>
-            <option value="blaster">ブラスター</option>
-            <option value="roller">ローラー</option>
-            <option value="brush">フデ</option>
-            <option value="charger">チャージャー</option>
-            <option value="splatling">スピナー</option>
-            <option value="slosher">スロッシャー</option>
-          </select>
-        </label>
+        {preferences.map(p =>
+          <label key={p.name}>
+            <input
+              type="checkbox"
+              checked={this.props[p.name]}
+              name={p.name}
+              onChange={this.onChange}/>
+            {p.label}
+          </label>
+        )}
       </div>
     );
   }
@@ -204,34 +207,28 @@ var ControlPanel = React.createClass({
 var App = React.createClass({
   getInitialState: function () {
     return {
-      showPenalty: true,
-      weaponType: 'all'
+      shooter: true,
+      blaster: true,
+      roller: true,
+      brush: true,
+      charger: true,
+      splatling: true,
+      slosher: true,
+      penalty: true
     };
   },
 
-  onChangeShowPenalty: function (e) {
-    this.setState({
-      showPenalty: e.target.checked
-    });
-  },
-
-  onChangeWeaponType: function (e) {
-    this.setState({
-      weaponType: e.target.value
-    });
+  onChange: function (name, value) {
+    var newState = {};
+    newState[name] = value;
+    this.setState(newState);
   },
 
   render: function () {
     return (
       <div className="app">
-        <ControlPanel
-          showPenalty={this.state.showPenalty}
-          onChangeShowPenalty={this.onChangeShowPenalty}
-          weaponType={this.state.weaponType}
-          onChangeWeaponType={this.onChangeWeaponType}/>
-        <WeaponTable
-          showPenalty={this.state.showPenalty}
-          weaponType={this.state.weaponType}/>
+        <ControlPanel {...this.state} onChange={this.onChange}/>
+        <WeaponTable {...this.state}/>
       </div>
     );
   }
