@@ -147,7 +147,12 @@ var WeaponTable = React.createClass({
                       .map(set =>
                         <span key={set.main} className={'weapon ' + set.type}>
                           {set.main}
-                          <span className="penalty" data-amount={set.penalty}>{set.penalty}</span>
+                          {
+                            this.props.showPenalty &&
+                            <span className="penalty" data-amount={set.penalty}>
+                              {set.penalty}
+                            </span>
+                          }
                         </span>
                       )
                     }
@@ -162,11 +167,43 @@ var WeaponTable = React.createClass({
   }
 });
 
+var ControlPanel = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={this.props.showPenalty}
+            onChange={this.props.onChangeShowPenalty}/>
+          <span>スペシャル減少量を表示</span>
+        </label>
+      </div>
+    );
+  }
+});
+
 var App = React.createClass({
+  getInitialState: function () {
+    return {
+      showPenalty: true
+    };
+  },
+
+  onChangeShowPenalty: function (e) {
+    this.setState({
+      showPenalty: e.target.checked
+    });
+  },
+
   render: function () {
     return (
       <div className="app">
-        <WeaponTable/>
+        <ControlPanel
+          showPenalty={this.state.showPenalty}
+          onChangeShowPenalty={this.onChangeShowPenalty}/>
+        <WeaponTable
+          showPenalty={this.state.showPenalty}/>
       </div>
     );
   }
