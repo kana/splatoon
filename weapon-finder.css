@@ -55,3 +55,12 @@ tr:nth-child(even) {
 .penalty[data-amount="小"] { color: #00f; }
 .penalty[data-amount="中"] { color: #f90; }
 .penalty[data-amount="大"] { color: #f00; }
+
+.control-panel {
+  text-align: center;
+}
+
+.preference + .preference {
+  margin-left: 1ex;
+}
+}

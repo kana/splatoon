@@ -188,9 +188,9 @@ var ControlPanel = React.createClass({
     ];
 
     return (
-      <div>
+      <div className="control-panel">
         {preferences.map(p =>
-          <label key={p.name}>
+          <label key={p.name} className="preference">
             <input
               type="checkbox"
               checked={this.props[p.name]}
