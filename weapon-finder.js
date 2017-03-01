@@ -144,6 +144,9 @@ var WeaponTable = React.createClass({
                     {
                       WeaponSets
                       .filter(set => this.has(set, sub, sp))
+                      .filter(set =>
+                        this.props.weaponType === 'all' ||
+                        this.props.weaponType === set.type)
                       .map(set =>
                         <span key={set.main} className={'weapon ' + set.type}>
                           {set.main}
@@ -178,6 +181,21 @@ var ControlPanel = React.createClass({
             onChange={this.props.onChangeShowPenalty}/>
           <span>スペシャル減少量を表示</span>
         </label>
+        <label>
+          <span>メインウェポンの種類</span>
+          <select
+            value={this.props.weaponType}
+            onChange={this.props.onChangeWeaponType}>
+            <option value="all">全て</option>
+            <option value="shooter">シューター</option>
+            <option value="blaster">ブラスター</option>
+            <option value="roller">ローラー</option>
+            <option value="brush">フデ</option>
+            <option value="charger">チャージャー</option>
+            <option value="splatling">スピナー</option>
+            <option value="slosher">スロッシャー</option>
+          </select>
+        </label>
       </div>
     );
   }
@@ -186,7 +204,8 @@ var ControlPanel = React.createClass({
 var App = React.createClass({
   getInitialState: function () {
     return {
-      showPenalty: true
+      showPenalty: true,
+      weaponType: 'all'
     };
   },
 
@@ -196,14 +215,23 @@ var App = React.createClass({
     });
   },
 
+  onChangeWeaponType: function (e) {
+    this.setState({
+      weaponType: e.target.value
+    });
+  },
+
   render: function () {
     return (
       <div className="app">
         <ControlPanel
           showPenalty={this.state.showPenalty}
-          onChangeShowPenalty={this.onChangeShowPenalty}/>
+          onChangeShowPenalty={this.onChangeShowPenalty}
+          weaponType={this.state.weaponType}
+          onChangeWeaponType={this.onChangeWeaponType}/>
         <WeaponTable
-          showPenalty={this.state.showPenalty}/>
+          showPenalty={this.state.showPenalty}
+          weaponType={this.state.weaponType}/>
       </div>
     );
   }
