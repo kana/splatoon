@@ -109,7 +109,7 @@ var WeaponSets = [
   {type: 'slosher', main: 'スクリュースロッシャー', sub: 'スプラッシュボム', special: 'ボムラッシュ', penalty: '小'},
   {type: 'slosher', main: 'スクリュースロッシャーデコ', sub: 'ポイントセンサー', special: 'スーパーショット', penalty: '小'},
   {type: 'splatling', main: 'バレルスピナー', sub: 'スプラッシュシールド', special: 'トルネード', penalty: '小'},
-  {type: 'splatling', main: 'バレルスピナーコラボ', sub: 'ポイントセンサー', special: 'ダイオウイカ', penalty: '中'},
+  {type: 'splatling', main: 'バレルスピナーデコ', sub: 'ポイントセンサー', special: 'ダイオウイカ', penalty: '中'},
   {type: 'splatling', main: 'バレルスピナーリミックス', sub: 'スプリンクラー', special: 'メガホンレーザー', penalty: '小'},
   {type: 'splatling', main: 'スプラスピナー', sub: 'キューバンボム', special: 'スーパーショット', penalty: '小'},
   {type: 'splatling', main: 'スプラスピナーコラボ', sub: 'ポイズンボール', special: 'バリア', penalty: '大'},
