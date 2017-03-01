@@ -145,7 +145,11 @@ var WeaponTable = React.createClass({
                       WeaponSets
                       .filter(set =>
                         this.has(set, sub, sp) &&
-                        this.props[set.type]
+                        this.props[set.type] && (
+                          set.penalty === '小' && this.props.penaltyLight ||
+                          set.penalty === '中' && this.props.penaltyMedium ||
+                          set.penalty === '大' && this.props.penaltyHeavy
+                        )
                       )
                       .map(set =>
                         <span key={set.main} className={'weapon ' + set.type}>
@@ -184,7 +188,10 @@ var ControlPanel = React.createClass({
       {name: 'charger', label: 'チャージャー'},
       {name: 'splatling', label: 'スピナー'},
       {name: 'slosher', label: 'スロッシャー'},
-      {name: 'penalty', label: 'スペシャル減少量'}
+      {name: 'penalty', label: 'スペシャル減少量'},
+      {name: 'penaltyLight', label: '小'},
+      {name: 'penaltyMedium', label: '中'},
+      {name: 'penaltyHeavy', label: '大'}
     ];
 
     return (
@@ -214,7 +221,10 @@ var App = React.createClass({
       charger: true,
       splatling: true,
       slosher: true,
-      penalty: true
+      penalty: true,
+      penaltyLight: true,
+      penaltyMedium: true,
+      penaltyHeavy: true
     };
   },
 
