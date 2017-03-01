@@ -147,6 +147,7 @@ var WeaponTable = React.createClass({
                       .map(set =>
                         <span key={set.main} className={'weapon ' + set.type}>
                           {set.main}
+                          <span className="penalty" data-amount={set.penalty}>{set.penalty}</span>
                         </span>
                       )
                     }
